@@ -1,0 +1,32 @@
+<h1>Hi there, <%=@user.email%>! What story are you going to tell today?</h1>
+
+<h2>Start with a sentence.</h2>
+<p>
+  <%=form_for(@story) do |f|%>
+    <%=f.text_field :content %>
+    <%=f.submit "Start Story" %>
+    <% end %>
+
+</p>
+
+<h2>Your Stories</h2>
+
+<%@user_stories.each do |story|%>
+    <h3>THE STORY: <%=story.content%></h3>
+    Started by: <%=story.user.email%><br>
+    <br>
+    Contributors: <%if !story.users.empty? %>
+        <%story.users.each do |user| %>
+              <%=user.email%>
+              <%end%>
+          <%else%>
+          <p>Just you, for now.</p>
+          <%end%>
+
+    <%end%>
+
+
+
+
+
+<p><%=link_to('log out', destroy_user_session_path, :method => :delete)%></p>
