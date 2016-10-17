@@ -14,12 +14,13 @@ class UsersController < ApplicationController
   end
 
   def create
-    binding.pry
+
   end
 
   def show
     @user = current_user
     @story = Story.new
+    @all_stories = Story.all
     @user_stories = Story.all.select {|s| s.user == @user}
   end
 
