@@ -3,13 +3,15 @@ class StoriesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @story = Story.new(story_params)
-    @story.user = current_user
-    @story.users << current_user
+    @story = current_user.stories.build(story_params)
+
     if @story.save
+      story_user = @story.story_users.build(user_id: current_user.id, story_id: @story.id)
+      story_user.save
+      @story.users << current_user
       redirect_to user_path(current_user)
     else
-      redirect_to user_path
+      render user_path
     end
   end
 
@@ -34,9 +36,10 @@ private
   end
 
   def add_to_story
+    binding.pry 
     @story = Story.find_by_id(params[:id])
     @story.content = @story.content + " " + story_params[:content]
-    @story.users << current_user if !@story.users.include?(current_user)
+    @story.users << current_user
     @story.save
   end
 

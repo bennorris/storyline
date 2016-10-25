@@ -17,7 +17,11 @@
     Contributors: <%story.users.each do |user| %>
       <%=user.email%><br>
         <%end%>
+        <%if story.users.include?(current_user)%>
+          <p>You've already contributed to this story</p>
+          <%else%>
         <%=link_to("Add a Sentence", edit_story_path(story)) %><br><br>
+        <%end%>
     <%end%>
 
 <h2>Your Stories</h2>
