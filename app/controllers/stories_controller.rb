@@ -34,7 +34,6 @@ private
   end
 
   def add_to_story
-    binding.pry
     @story = Story.find_by_id(params[:id])
     @story.content = @story.content + " " + story_params[:content]
     @story.users << current_user
