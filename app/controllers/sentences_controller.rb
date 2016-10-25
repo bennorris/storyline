@@ -19,8 +19,8 @@ class SentencesController < ApplicationController
     end
   end
 
-  def show 
-    @sentence = Sentence.find_by_id(params[:story_id])
+  def show
+    @sentence = Sentence.find_by_id(params[:id])
   end
 
 private
