@@ -1,3 +1,9 @@
 <h3><%=@story.content %><h3> <br>
+Started by: <%=@story.user.email%><br>
+Contributors: <%@story.all_contributors.each do |name, sentence| %>
+    <%=link_to "#{name.email}", story_sentence_path(sentence.id) %><br>
+      <%end%>
 
+<br>
+<br>
 <%=link_to("Back to Your Profile", user_path(current_user)) %>

@@ -1,4 +1,3 @@
-require 'pry'
 class StoriesController < ApplicationController
   before_action :authenticate_user!
 
@@ -6,9 +5,8 @@ class StoriesController < ApplicationController
     @story = current_user.stories.build(story_params)
 
     if @story.save
-      story_user = @story.story_users.build(user_id: current_user.id, story_id: @story.id)
-      story_user.save
-      @story.users << current_user
+      sentence = @story.sentences.build(user_id: current_user.id, story_id: @story.id, content: @story.content)
+      sentence.save
       redirect_to user_path(current_user)
     else
       render user_path
@@ -36,7 +34,7 @@ private
   end
 
   def add_to_story
-    binding.pry 
+    binding.pry
     @story = Story.find_by_id(params[:id])
     @story.content = @story.content + " " + story_params[:content]
     @story.users << current_user

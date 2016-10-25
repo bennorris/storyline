@@ -13,14 +13,14 @@
 <h2> Other Stories </h2>
   <%@all_stories.each do |story| %>
     <%=story.content %> <br>
-    Started by: <%=story.user.email%><br>
-    Contributors: <%story.users.each do |user| %>
-      <%=user.email%><br>
-        <%end%>
-        <%if story.users.include?(current_user)%>
-          <p>You've already contributed to this story</p>
+    <%=link_to "see contributors & more", story_path(story)  %><br>
+
+        <% contribution = story.sentences.select {|x| x.user_id.to_i == current_user.id.to_i } %>
+        <%if !contribution.empty?%>
+
+          <p><%=link_to("You've already contributed to this story", story_sentence_path(Sentence.find_by_id(contribution.first.id)))%></p>
           <%else%>
-        <%=link_to("Add a Sentence", edit_story_path(story)) %><br><br>
+        <%=link_to("Add a Sentence", new_story_sentence_path(story.id)) %><br><br>
         <%end%>
     <%end%>
 
