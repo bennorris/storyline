@@ -10,12 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161025203735) do
+ActiveRecord::Schema.define(version: 20161025221038) do
 
   create_table "sentences", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "story_id"
-    t.string  "content"
+    t.integer  "user_id"
+    t.integer  "story_id"
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "stories", force: :cascade do |t|
