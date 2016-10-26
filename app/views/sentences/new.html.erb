@@ -6,9 +6,14 @@
 
 
 <%=form_for(@sentence, :url => story_sentences_path) do |f| %>
-<%=f.text_field :content, :maxlength => 100, :value => nil %>
+  <%if flash[:error].present?%>
+    <%=f.text_field :content, :maxlength => 100, :value => nil, :placeholder => "#{flash[:error]}" %>
+  <%else%>
+    <%=f.text_field :content, :maxlength => 100, :value => nil%>
+    <% end %>
 <%=f.submit "Add Your Sentence" %>
 <% end %>
+
   <h3>Contributors:  <br><%@story.sentences.each do |sentence| %>
       <%=sentence.user.email %>: <%=sentence.content%><br>
       <% end %>  </h3>

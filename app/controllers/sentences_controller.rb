@@ -15,7 +15,7 @@ class SentencesController < ApplicationController
       story.save
       redirect_to story_path(story)
     else
-      render new_story_sentence_path
+      redirect_to new_story_sentence_path, :flash => { :error => "Sentence cannot be blank and must be under 100 characters." }
     end
   end
 
