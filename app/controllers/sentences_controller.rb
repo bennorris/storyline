@@ -20,9 +20,10 @@ class SentencesController < ApplicationController
   end
 
   def show
+
     @sentence = Sentence.find_by_id(params[:id])
     @user = User.find_by_id(@sentence.user_id)
-    @created = @sentence.created_at.strftime("%B %e, %Y at %I:%M%p")
+    @created = @sentence.created_at.in_time_zone('Eastern Time (US & Canada)').strftime("%B %e, %Y at %I:%M %p")
   end
 
 private

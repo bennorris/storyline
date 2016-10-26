@@ -15,10 +15,9 @@
     <%=story.content %> <br>
     <%=link_to "see contributors & more", story_path(story)  %><br>
 
+      <% if story.sentences.last.user_id == current_user.id %>
         <% contribution = story.sentences.select {|x| x.user_id.to_i == current_user.id.to_i } %>
-        <%if !contribution.empty?%>
-
-          <p><%=link_to("You've already contributed to this story", story_sentence_path(Sentence.find_by_id(contribution.first.id)))%></p>
+          <p>You were the latest to contribute!</p>
           <%else%>
         <%=link_to("Add a Sentence", new_story_sentence_path(story.id)) %><br><br>
         <%end%>
@@ -31,7 +30,6 @@
     <% end %>
 <%@user_stories.each do |story|%>
     <h3>THE STORY: <%=story.content%></h3>
-    Started by: <%=story.user.email%><br>
     <br>
     Contributors: <%if !story.users.empty? %>
         <%story.users.each do |user| %>
@@ -40,7 +38,9 @@
           <%else%>
           <p>Just you, for now.</p>
           <%end%>
+          <%if story.sentences.last.user_id != current_user.id %>
       <h3><%=link_to("Add a Sentence", edit_story_path(story))%></h3>
+        <% end %> 
 
     <%end%>
 
