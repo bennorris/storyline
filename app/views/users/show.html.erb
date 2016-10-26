@@ -14,21 +14,25 @@
 </div>
 
 <div class="other-stories-box">
+    <h2> Add to a different story. </h2>
+      <%story = @all_stories.sample %>
+      <div class="individual-story">
+        <%=story.content %> <br>
+        <%=link_to "see contributors & more", story_path(story)  %><br>
 
-<h2> Add to a different story. </h2>
-  <%@all_stories.each do |story| %>
-  <div class="individual-story">
-    <%=story.content %> <br>
-    <%=link_to "see contributors & more", story_path(story)  %><br>
+          <% if story.sentences.last.user_id == current_user.id %>
+            <% contribution = story.sentences.select {|x| x.user_id.to_i == current_user.id.to_i } %>
+              <p>You were the latest to contribute!</p>
+              <%else%>
+            <%=link_to("Add a Sentence", new_story_sentence_path(story.id)) %><br><br>
+            <%end%>
+            <%=link_to("NEXT", user_path(current_user))%>
+          </div>
 
-      <% if story.sentences.last.user_id == current_user.id %>
-        <% contribution = story.sentences.select {|x| x.user_id.to_i == current_user.id.to_i } %>
-          <p>You were the latest to contribute!</p>
-          <%else%>
-        <%=link_to("Add a Sentence", new_story_sentence_path(story.id)) %><br><br>
-        <%end%>
-      </div>
-    <%end%>
+
+
+
+
 </div>
 
 
