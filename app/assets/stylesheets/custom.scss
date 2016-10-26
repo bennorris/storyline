@@ -139,7 +139,7 @@ div.individual-story {
   margin-top: 2em;
 }
 
-/* LOGIN PAGE */
+/* DEVISE VIEWS  */
 
 div.login-or-signup {
   margin-top: 10%;
@@ -151,4 +151,128 @@ div.login-or-signup {
 div.login-or-signup h2 {
   font-family: 'Bungee Shade', cursive;
   font-size: 60px;
+}
+
+/* NEW SENTENCE TO EXISTING STORY - SENTENCE/NEW */
+
+
+div.story-so-far {
+  font-family: 'Didact Gothic', sans-serif;
+  color: black;
+  background: image-url("light_honeycomb.png");
+  background-repeat: repeat;
+  text-align: center;
+  width: 100%;
+  min-height: 100%;
+  float: left;
+  padding-bottom: 2%;
+}
+
+div.story-so-far h1 {
+font-family: 'Bungee Shade', cursive;
+font-size: 45px;
+padding-top: 7%;
+}
+
+div.story-so-far h3 {
+  padding-top: 2%;
+}
+
+div.story-so-far form {
+  padding-top: 5%;
+}
+
+div.story-so-far input {
+  font-size: 1.75em;
+}
+
+/* STORY SHOW PAGE */
+
+div.story-show-page {
+  color: black;
+  background: image-url("light_honeycomb.png");
+  background-repeat: repeat;
+  text-align: center;
+  width: 100%;
+  min-height: 100%;
+  float: left;
+  padding-bottom: 2%;
+}
+
+div.story-show-page h1 {
+  font-family: 'Bungee Shade', cursive;
+  font-size: 45px;
+  padding-top: 7%;
+}
+
+div.story-show-page p {
+  font-family: 'Didact Gothic', sans-serif;
+  font-size: 2em;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+div.the-story-in-show {
+  padding-top: 2%;
+}
+
+div.story-show-page h3 {
+  font-size: 2.5em;
+  font-family: 'Bungee Shade', cursive;
+}
+
+div.story-started-by {
+  color: white;
+  background: image-url("dark_honeycomb.jpg");
+  background-repeat: repeat;
+  text-align: center;
+  width: 100%;
+}
+
+div.story-started-by h3 {
+  font-family: 'Bungee Shade', cursive;
+  font-size: 35px;
+  padding-top: 2%;
+}
+
+div.contributors-box {
+  padding-top: 2%;
+}
+
+div.contributor-1 {
+  font-family: 'Didact Gothic', sans-serif;
+  font-size: 1.7em;
+}
+
+div.contributor-2 {
+  font-family: 'Didact Gothic', sans-serif;
+  font-size: 1.7em;
+}
+
+div.contributor-1 a {
+  color: #B71C1C;
+}
+
+div.contributor-2 a {
+  color: #1A237E;
+}
+
+div.back-to-profile {
+  margin-top: 10%;
+}
+
+div.back-to-profile a {
+  margin-top: 10%;
+  font-family: 'Didact Gothic', sans-serif;
+  font-size: 1.25em;
+  color: #0D47A1;
+  border: 4px solid #0D47A1;
+  border-radius: 10px;
+  padding: 0.5%;
+}
+
+div.back-to-profile a:hover {
+  background: #0D47A1;
+  color: white;
+  text-decoration: none;
 }

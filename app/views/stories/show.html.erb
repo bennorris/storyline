@@ -1,9 +1,30 @@
-<h3><%=@story.content %><h3> <br>
-Started by: <%=@story.user.email%><br>
-Contributors: <%@story.all_contributors.each do |name, sentence| %>
-    <%=link_to "#{name.email}", story_sentence_path(@story, sentence) %><br>
-      <%end%>
+<div class="story-show-page">
 
+
+<h1>The Story So Far:</h1>
+<div class="the-story-in-show">
+
+  <p><%=@story.content %></p> <br>
+    <div class="story-started-by">
+  <h3>Started by:</h3><p><%=@story.user.email%></p><br>
+  </div>
+  <h3>Contributors:</h3>
+  <div class="contributors-box">
+    <%count = 1 %>
+    <p><%@story.all_contributors.each do |name, sentence| %>
+      <%if count.odd?%>
+        <div class="contributor-1">
+      <%else%>
+        <div class="contributor-2">
+      <%end%>
+      <%=name.email%>:&nbsp;&nbsp;<%=link_to "#{sentence.content}", story_sentence_path(@story, sentence) %><br>
+        <%count+=1%></div>
+        <%end%></p>
+      </div>
+</div>
 <br>
 <br>
+<div class="back-to-profile">
 <%=link_to("Back to Your Profile", user_path(current_user)) %>
+</div>
+</div>

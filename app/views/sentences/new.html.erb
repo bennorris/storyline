@@ -1,3 +1,5 @@
+<div class="story-so-far">
+
 <h1>The Story So Far:</h1>
 
 <h3><%=@story.content%></h3>
@@ -5,5 +7,9 @@
 
 <%=form_for(@sentence, :url => story_sentences_path) do |f| %>
 <%=f.text_field :content, :maxlength => 100, :value => nil %>
-<%=f.submit %>
+<%=f.submit "Add Your Sentence" %>
 <% end %>
+  <h3>Contributors:  <br><%@story.sentences.each do |sentence| %>
+      <%=sentence.user.email %>: <%=sentence.content%><br>
+      <% end %>  </h3>
+</div>
