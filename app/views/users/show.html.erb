@@ -5,6 +5,7 @@
 
 <div class="story-box">
 <h2>Start a new story.</h2>
+<br>
 <p>
   <%=form_for(@story) do |f|%>
     <%=f.text_field :content, :maxlength => 100 %>
@@ -41,15 +42,10 @@
     <h3>None yet!</h3>
     <% end %>
 <%@user_stories.each do |story|%>
-    <h3>THE STORY: <%=story.content%></h3>
+    <h3><%=story.content%></h3>
+    <%=link_to("details", story_path(story)) %>
     <br>
-    Contributors: <%if !story.users.empty? %>
-        <%story.users.each do |user| %>
-              <%=user.email%>
-              <%end%>
-          <%else%>
-          <p>Just you, for now.</p>
-          <%end%>
+
           <%if story.sentences.last.user_id != current_user.id %>
       <h3><%=link_to("Add a Sentence", edit_story_path(story))%></h3>
         <% end %>
