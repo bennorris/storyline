@@ -2,6 +2,9 @@
 @import "bootstrap";
 @import url('https://fonts.googleapis.com/css?family=Quicksand:700');
 @import url('https://fonts.googleapis.com/css?family=Bungee+Shade|Didact+Gothic');
+@import url('https://fonts.googleapis.com/css?family=Bungee');
+
+
 
 body {
   height: 100%;
@@ -41,6 +44,17 @@ textarea {
   color: #FF8A80;
 }
 
+.logo-nav {
+  text-decoration: none;
+  color: white;
+  font-family: 'Bungee', cursive;
+  text-align:right;
+  padding-right: 2%;
+  font-size: 2em;
+  list-style-type: none;
+  margin-top: 0.5%;
+}
+
 /* USER SHOW PAGE STYLING */
 
 div.story-box {
@@ -57,7 +71,11 @@ div.story-box {
 div.story-box h2 {
   font-family: 'Bungee Shade', cursive;
   font-size: 60px;
-  padding-top: 5%;
+  padding-top: 7%;
+}
+
+div.story-box form {
+  padding-bottom: 2%;
 }
 
 div.right-side {
