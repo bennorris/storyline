@@ -57,7 +57,7 @@ div.story-box {
 div.story-box h2 {
   font-family: 'Bungee Shade', cursive;
   font-size: 60px;
-  padding-top: 2%;
+  padding-top: 5%;
 }
 
 div.right-side {
@@ -71,4 +71,49 @@ div.right-side {
 h1.user-heading {
   text-align: center;
   font-family: 'Didact Gothic', sans-serif;
+}
+
+div.other-stories-box {
+  font-family: 'Didact Gothic', sans-serif;
+  color: white;
+  background: image-url("dark_honeycomb.jpg");
+  background-repeat: repeat;
+  text-align: center;
+  width: 100%;
+  min-height: 40%;
+  float: left;
+  padding-bottom: 2%;
+}
+
+div.other-stories-box h2 {
+font-family: 'Bungee Shade', cursive;
+font-size: 45px;
+padding-top: 1%;
+}
+
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+  color:black;
+}
+
+div.your-stories-box {
+  font-family: 'Didact Gothic', sans-serif;
+  color: black;
+  background: image-url("light_honeycomb.png");
+  background-repeat: repeat;
+  text-align: center;
+  width: 100%;
+  min-height: 40%;
+  float: left;
+  padding-bottom: 2%;
+}
+
+div.your-stories-box h2 {
+  font-family: 'Bungee Shade', cursive;
+  font-size: 60px;
+  padding-top: 1%;
+}
+
+div.individual-story {
+  display: inline-block;
+  border-bottom: 2px solid white;
 }

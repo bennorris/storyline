@@ -13,9 +13,11 @@
 </p>
 </div>
 
+<div class="other-stories-box">
 
-<h2> Other Stories </h2>
+<h2> Add to a different story. </h2>
   <%@all_stories.each do |story| %>
+  <div class="individual-story">
     <%=story.content %> <br>
     <%=link_to "see contributors & more", story_path(story)  %><br>
 
@@ -25,11 +27,12 @@
           <%else%>
         <%=link_to("Add a Sentence", new_story_sentence_path(story.id)) %><br><br>
         <%end%>
+      </div>
     <%end%>
 </div>
 
 
-<div class="right-side">
+<div class="your-stories-box">
 <h2>Your Stories</h2>
 
 <%if @user_stories.empty?%>
