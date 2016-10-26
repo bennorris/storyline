@@ -1,14 +1,18 @@
 <link rel="stylesheet" href="../app/assets/stylesheets/application.css">
-<h1>Hi there, <%=@user.email%>! What story are you going to tell today?</h1>
+<!-- <h1 class="user-heading">“To hell with facts! We need stories!”<br>-Ken Kesey</h1>
+<h1 class="user-heading">What story are you going to write today, <%=@user.email%>?</h1> -->
 
-<h2>Start with a sentence.</h2>
+
+<div class="story-box">
+<h2>Start a new story.</h2>
 <p>
   <%=form_for(@story) do |f|%>
     <%=f.text_field :content, :maxlength => 100 %>
     <%=f.submit "Start Story" %>
     <% end %>
-
 </p>
+</div>
+
 
 <h2> Other Stories </h2>
   <%@all_stories.each do |story| %>
@@ -22,7 +26,10 @@
         <%=link_to("Add a Sentence", new_story_sentence_path(story.id)) %><br><br>
         <%end%>
     <%end%>
+</div>
 
+
+<div class="right-side">
 <h2>Your Stories</h2>
 
 <%if @user_stories.empty?%>
@@ -40,12 +47,7 @@
           <%end%>
           <%if story.sentences.last.user_id != current_user.id %>
       <h3><%=link_to("Add a Sentence", edit_story_path(story))%></h3>
-        <% end %> 
+        <% end %>
 
     <%end%>
-
-
-
-
-
-<p><%=link_to('log out', destroy_user_session_path, :method => :delete)%></p>
+</div>
