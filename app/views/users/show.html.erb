@@ -18,20 +18,18 @@
       <%story = @all_stories.sample %>
       <div class="individual-story">
         <%=story.content %> <br>
-        <%=link_to "see contributors & more", story_path(story)  %><br>
-
+        <br>
           <% if story.sentences.last.user_id == current_user.id %>
-            <% contribution = story.sentences.select {|x| x.user_id.to_i == current_user.id.to_i } %>
-              <p>You were the latest to contribute!</p>
+
+              <p style="color: #EF9A9A">You were the most recent to contribute. You can add a new sentence after someone else has.</p>
               <%else%>
             <%=link_to("Add a Sentence", new_story_sentence_path(story.id)) %><br><br>
+
+            <%=link_to "see contributors & more", story_path(story)  %><br>
+            <br>
             <%end%>
             <%=link_to("NEXT", user_path(current_user))%>
           </div>
-
-
-
-
 
 </div>
 
@@ -57,4 +55,14 @@
         <% end %>
 
     <%end%>
+</div>
+
+
+<div class="your-contributions-box">
+<h2>Your Contributions</h2>
+
+  <% @user_sentences.each do |sentence| %>
+      <p><%=sentence.content%></p>
+      <%=link_to("full story", story_path(sentence.story)) %>
+      <% end %>
 </div>

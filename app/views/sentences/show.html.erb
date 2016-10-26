@@ -1,8 +1,15 @@
+<div class="sentence-show-page">
 
-<h2> <%=@sentence.content%> </h2>
-
-<h3> Written by <%=@user.email %> </h3>
-<h3>Created on <%=@created%></h3>
-
+<div class="sentence-box">
+<p class="individual-sentence">THE SENTENCE:</p><p><%=@sentence.content%> </p>
+</div>
+<div class="sentence-box">
+<p class="individual-sentence">Written by:</p><p><%=@user.email %></p>
+</div>
+<div class="sentence-box">
+<p class="individual-sentence">Created on:</p><p><%=@created%></p>
+</div>
 
 <p><%=link_to("Back", user_path(current_user))%></p>
+
+</div>

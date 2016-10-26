@@ -22,6 +22,7 @@ class UsersController < ApplicationController
     @story = Story.new
     @all_stories = Story.all
     @user_stories = Story.all.select {|s| s.user == @user}
+    @user_sentences = Sentence.all.select {|s| s.user == @user}
   end
 
   def destroy
