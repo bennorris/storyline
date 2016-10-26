@@ -1,0 +1,28 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Quicksand:700');
+
+body {
+  padding-top: 60px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.navbar-default {
+  background-color: #0D47A1
+}
+
+.nav-container {
+  left: 0px;
+}
+
+.header-links {
+  font-family: 'Quicksand', sans-serif;
+  color: white;
+}
