@@ -9,7 +9,7 @@ class StoriesController < ApplicationController
       sentence.save
       redirect_to user_path(current_user)
     else
-      render user_path
+      redirect_to user_path(current_user), :flash => { :error => "Story cannot be blank and must be under 100 characters." }
     end
   end
 

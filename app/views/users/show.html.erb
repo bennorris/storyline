@@ -1,14 +1,18 @@
 <link rel="stylesheet" href="../app/assets/stylesheets/application.css">
-<!-- <h1 class="user-heading">“To hell with facts! We need stories!”<br>-Ken Kesey</h1>
-<h1 class="user-heading">What story are you going to write today, <%=@user.email%>?</h1> -->
+
 
 
 <div class="story-box">
 <h2>Start a new story.</h2>
 <br>
 <p>
+
   <%=form_for(@story) do |f|%>
-    <%=f.text_field :content, :maxlength => 100 %>
+    <%if flash[:error].present?%>
+      <%=f.text_field :content, :maxlength => 100, :placeholder => "#{flash[:error]}" %>
+    <% else %>
+      <%=f.text_field :content, :maxlength => 100, :placeholder => "What's the best sentence you have?" %>
+    <% end %>
     <%=f.submit "Start Story" %>
     <% end %>
 </p>
@@ -30,6 +34,7 @@
             <br>
             <%end%>
             <%=link_to("NEXT", user_path(current_user))%>
+
           </div>
 
 </div>

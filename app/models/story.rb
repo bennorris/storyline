@@ -5,7 +5,8 @@ class Story < ApplicationRecord
   has_many :users, through: :sentences
   has_many :users, through: :story_users
 
-
+  validates :content, presence: true
+  validates :content, length: { maximum: 100 }
 
  def all_contributors
    users = {}
