@@ -17,4 +17,7 @@
   <h3>Contributors:  <br><%@story.sentences.each do |sentence| %>
       <%=sentence.user.email %>: <%=sentence.content%><br>
       <% end %>  </h3>
+<div class="back-button">
+      <p><%=link_to("Back", user_path(current_user))%></p>
+    </div>
 </div>
