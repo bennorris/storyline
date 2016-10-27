@@ -32,8 +32,7 @@ class UsersController < ApplicationController
   def stats
     @user = User.find_by_id(params[:id])
     @stories = @user.stories
-    @sentences = @user.sentences
-
+    @sentences = @user.sentences.select { |s| s.also_story == false }
   end
 
 
