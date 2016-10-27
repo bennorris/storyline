@@ -6,6 +6,7 @@ class StoriesController < ApplicationController
 
     if @story.save
       sentence = @story.sentences.build(user_id: current_user.id, story_id: @story.id, content: @story.content)
+      sentence.also_story = true
       sentence.save
       redirect_to user_path(current_user), :flash => { :success => "Success! You can find your story below, in the 'Your Stories' section." }
     else
@@ -25,7 +26,6 @@ class StoriesController < ApplicationController
   def show
     @story = Story.find_by_id(params[:id])
     @sentence = Sentence.new
-
   end
 
 

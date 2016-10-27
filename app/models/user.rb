@@ -15,4 +15,6 @@ class User < ApplicationRecord
     count
   end
 
+
+
 end

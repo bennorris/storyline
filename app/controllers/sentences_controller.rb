@@ -20,11 +20,23 @@ class SentencesController < ApplicationController
   end
 
   def show
-
     @sentence = Sentence.find_by_id(params[:id])
     @user = User.find_by_id(@sentence.user_id)
     @created = @sentence.created_at.in_time_zone('Eastern Time (US & Canada)').strftime("%B %e, %Y at %I:%M %p")
   end
+
+  def destroy
+    sentence = Sentence.find_by_id(params[:id])
+
+    if sentence.also_story == true
+      story = Story.find_by_id(sentence.story_id)
+      story.destroy
+    end
+    sentence.destroy
+    redirect_to user_path(current_user), :flash => { :deleted => "Successfully deleted post."}
+  end
+
+
 
 private
 

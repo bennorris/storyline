@@ -26,6 +26,7 @@
       <div class="individual-story">
         <%=story.content %> <br>
         <br>
+          <% if !story.sentences.last.nil?%>
           <% if story.sentences.last.user_id == current_user.id %>
 
               <p style="color: #EF9A9A">You were the most recent to contribute. You can add a new sentence after someone else has.</p>
@@ -33,6 +34,7 @@
             <%=link_to("Add a Sentence", new_story_sentence_path(story.id)) %><br><br>
             <% end %>
             <%=link_to "see contributors & more", story_path(story)  %><br>
+            <% end %>
             <br>
 
 
@@ -55,10 +57,11 @@
     <h3><%=story.content%></h3>
     <%=link_to("details", story_path(story)) %>
     <br>
-
+          <%if !story.sentences.last.nil?%>
           <%if story.sentences.last.user_id != current_user.id %>
       <h3><%=link_to("Add a Sentence", edit_story_path(story))%></h3>
         <% end %>
+        <%end%>
 
     <%end%>
 </div>
@@ -67,8 +70,8 @@
 <div class="your-contributions-box">
 <h2>Your Contributions</h2>
 
-  <% @user_sentences.reverse.each do |sentence| %>
+  <% @user_contributions.reverse.each do |sentence| %>
       <p><%=sentence.content%></p>
-      <%=link_to("full story", story_path(sentence.story)) %>
+      <%=link_to("full story", story_path(sentence.story)) %>&nbsp;&nbsp;|&nbsp;&nbsp;<%=link_to("delete", story_sentence_path(sentence.story, sentence), :method => :delete) %>
       <% end %>
 </div>

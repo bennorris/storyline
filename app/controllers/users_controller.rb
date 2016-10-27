@@ -23,15 +23,15 @@ class UsersController < ApplicationController
       @story = Story.new
       @all_stories = Story.all
       @user_stories = Story.all.select {|s| s.user == @user}
-      @user_sentences = Sentence.all.select {|s| s.user == @user}
+      @user_contributions = @user.sentences.select {|s| s.also_story == false }
     else
       redirect_to user_path(current_user)
     end
   end
 
   def stats
-    @user = current_user
-    @stories = @user.stories 
+    @user = User.find_by_id(params[:id])
+    @stories = @user.stories
     @sentences = @user.sentences
 
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161027143220) do
+ActiveRecord::Schema.define(version: 20161027201013) do
 
   create_table "sentences", force: :cascade do |t|
     t.integer  "user_id"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20161027143220) do
     t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "also_story", default: false
   end
 
   create_table "stories", force: :cascade do |t|
