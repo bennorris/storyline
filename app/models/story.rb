@@ -1,9 +1,9 @@
 class Story < ApplicationRecord
   belongs_to :user
-  has_many :story_users
   has_many :sentences
-  has_many :users, through: :sentences
-  has_many :users, through: :story_users
+  has_many :upvotes, through: :sentences
+  has_many :users, through: :sentences, :foreign_key => "user_id"
+
 
   validates :content, presence: true
   validates :content, length: { maximum: 100 }
@@ -17,5 +17,6 @@ class Story < ApplicationRecord
    end
   users
 end
+
 
 end

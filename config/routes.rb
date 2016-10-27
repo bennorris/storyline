@@ -3,8 +3,11 @@ Rails.application.routes.draw do
   root 'users#welcome'
   resources :users
   resources :stories do
-    resources :sentences
+    resources :sentences do
+      resources :upvotes, only: [:new,:create,:edit,:update]
+    end
   end
+
   post '/users', to: 'users#create'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

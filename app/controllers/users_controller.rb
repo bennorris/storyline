@@ -18,11 +18,15 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = current_user
-    @story = Story.new
-    @all_stories = Story.all
-    @user_stories = Story.all.select {|s| s.user == @user}
-    @user_sentences = Sentence.all.select {|s| s.user == @user}
+    if current_user.id.to_i == params[:id].to_i
+      @user = current_user
+      @story = Story.new
+      @all_stories = Story.all
+      @user_stories = Story.all.select {|s| s.user == @user}
+      @user_sentences = Sentence.all.select {|s| s.user == @user}
+    else
+      redirect_to user_path(current_user)
+    end
   end
 
   def destroy

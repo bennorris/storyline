@@ -4,7 +4,15 @@
 <h1>The Story So Far:</h1>
 <div class="the-story-in-show">
 
-  <p><%=@story.content %></p> <br>
+  <p><%=@story.content %></p>
+    <% if @story.sentences.last.user != current_user %>
+  <%=form_for @sentence, :url => story_sentences_path(@story.id) do |f| %>
+    <%=f.text_field :content %>
+    <%=f.submit "Add your sentence" %>
+    <% end %>
+    <%end%>
+
+  <br>
     <div class="story-started-by">
   <h3>Started by:</h3><p><%=@story.user.email%></p><br>
   </div>
@@ -18,6 +26,13 @@
         <div class="contributor-2">
       <%end%>
       <%=name.email%>:&nbsp;&nbsp;<%=link_to "#{sentence.content}", story_sentence_path(@story, sentence) %><br>
+        <%if flash[:success].present?%>
+          <%=flash[:success] %>
+        <%elsif flash[:error].present?%>
+          <%=flash[:error]%>
+          <% end %>
+        <%=link_to "upvote", story_sentence_upvotes_path(@story.id, sentence.id), :method => :post %>
+
         <%count+=1%></div>
         <%end%></p>
       </div>
