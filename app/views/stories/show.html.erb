@@ -31,8 +31,11 @@
         <%elsif flash[:error].present?%>
           <%=flash[:error]%>
           <% end %>
+          <% if sentence.already_voted? { current_user.id } %>
+            you upvoted this!
+          <% else %>
         <%=link_to "upvote", story_sentence_upvotes_path(@story.id, sentence.id), :method => :post %>
-
+        <%end%>
         <%count+=1%></div>
         <%end%></p>
       </div>

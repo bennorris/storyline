@@ -31,10 +31,10 @@
               <p style="color: #EF9A9A">You were the most recent to contribute. You can add a new sentence after someone else has.</p>
               <%else%>
             <%=link_to("Add a Sentence", new_story_sentence_path(story.id)) %><br><br>
-
+            <% end %>
             <%=link_to "see contributors & more", story_path(story)  %><br>
             <br>
-            <%end%>
+        
 
             <%=link_to("NEXT", user_path(current_user))%>
             <%else%>
