@@ -176,6 +176,11 @@ div.your-contributions-box a {
   color: #FFD54F;
 }
 
+div.flash-success {
+  color: red;
+  font-size: 20px;
+}
+
 /* DEVISE VIEWS  */
 
 div.login-or-signup {
@@ -379,4 +384,29 @@ div.sentence-show-page a:hover {
   background: #0D47A1;
   color: white;
   text-decoration: none;
+}
+
+
+/* ///////////////// USER STATS PAGE /////////////////// */
+
+div.stats-box {
+  text-align: center;
+  color: black;
+  background: image-url("people.png");
+  background-repeat: repeat;
+  text-align: center;
+  width: 100%;
+  min-height: 100%;
+  float: left;
+  padding-bottom: 2%;
+}
+
+div.stats-box-info {
+  font-family: 'Didact Gothic', sans-serif;
+  font-size: 2em;
+  border: 20px solid orange;
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 10%;
+  padding: 2%;
 }

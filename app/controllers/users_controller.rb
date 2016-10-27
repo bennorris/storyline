@@ -29,6 +29,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def stats
+    @user = current_user
+    @stories = @user.stories 
+    @sentences = @user.sentences
+
+  end
+
+
+
   def destroy
     session.clear
     redirect_to root_path

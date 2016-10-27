@@ -7,4 +7,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
 
+  def all_upvotes
+    count = 0
+    self.sentences.each do |sentence|
+      count+= sentence.upvotes.size.to_i
+    end
+    count
+  end
+
 end

@@ -6,7 +6,7 @@
 <h2>Start a new story.</h2>
 <br>
 <p>
-  <%if flash[:success]%><%=flash[:success]%><%end%>
+  <%if flash[:success]%><div class="flash-success"><%=flash[:success]%><br></div><%end%>
   <%=form_for(@story) do |f|%>
     <%if flash[:error].present?%>
       <%=f.text_field :content, :maxlength => 100, :placeholder => "#{flash[:error]}" %>
