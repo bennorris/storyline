@@ -5,6 +5,8 @@
 <div class="the-story-in-show">
 
   <p><%=@story.content %></p>
+  <br>
+    <p class="upvotes">total upvotes: <%=@story.upvotes.size%></p>
     <% if @story.sentences.last.user != current_user %>
   <%=form_for @sentence, :url => story_sentences_path(@story.id) do |f| %>
     <%=f.text_field :content %>
@@ -26,17 +28,19 @@
         <div class="contributor-2">
       <%end%>
       <%=name.email%>:&nbsp;&nbsp;<%=link_to "#{sentence.content}", story_sentence_path(@story, sentence) %><br>
-        <%if flash[:success].present?%>
-          <%=flash[:success] %>
-        <%elsif flash[:error].present?%>
-          <%=flash[:error]%>
-          <% end %>
+
           <% if sentence.already_voted? { current_user.id } %>
-            you upvoted this!&nbsp;&nbsp;|&nbsp;&nbsp;
+          <%if flash[:success].present?%>
+            <%=flash[:success] %>
+          <%elsif flash[:error].present?%>
+            <%=flash[:error]%>
+            <% end %>
+            <p class="upvotes">you upvoted this!&nbsp;&nbsp;|&nbsp;&nbsp;
           <% else %>
-        <%=link_to "upvote", story_sentence_upvotes_path(@story.id, sentence.id), :method => :post %>&nbsp;&nbsp;|&nbsp;&nbsp;
+          <p class="upvotes"><%=link_to "upvote", story_sentence_upvotes_path(@story.id, sentence.id), :method => :post %>&nbsp;&nbsp;|&nbsp;&nbsp;
         <%end%>
-          total upvotes: <%=sentence.upvotes.size%>
+          total upvotes: <%=sentence.upvotes.size%></p><br>
+          <br>
         <%count+=1%></div>
         <%end%></p>
       </div>

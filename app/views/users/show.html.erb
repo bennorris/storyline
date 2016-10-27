@@ -6,7 +6,7 @@
 <h2>Start a new story.</h2>
 <br>
 <p>
-
+  <%if flash[:success]%><%=flash[:success]%><%end%>
   <%=form_for(@story) do |f|%>
     <%if flash[:error].present?%>
       <%=f.text_field :content, :maxlength => 100, :placeholder => "#{flash[:error]}" %>
@@ -34,7 +34,7 @@
             <% end %>
             <%=link_to "see contributors & more", story_path(story)  %><br>
             <br>
-        
+
 
             <%=link_to("NEXT", user_path(current_user))%>
             <%else%>
@@ -51,7 +51,7 @@
 <%if @user_stories.empty?%>
     <h3>None yet!</h3>
     <% end %>
-<%@user_stories.each do |story|%>
+<%@user_stories.reverse.each do |story|%>
     <h3><%=story.content%></h3>
     <%=link_to("details", story_path(story)) %>
     <br>
@@ -67,7 +67,7 @@
 <div class="your-contributions-box">
 <h2>Your Contributions</h2>
 
-  <% @user_sentences.each do |sentence| %>
+  <% @user_sentences.reverse.each do |sentence| %>
       <p><%=sentence.content%></p>
       <%=link_to("full story", story_path(sentence.story)) %>
       <% end %>

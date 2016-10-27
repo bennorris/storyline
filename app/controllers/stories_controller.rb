@@ -7,7 +7,7 @@ class StoriesController < ApplicationController
     if @story.save
       sentence = @story.sentences.build(user_id: current_user.id, story_id: @story.id, content: @story.content)
       sentence.save
-      redirect_to user_path(current_user)
+      redirect_to user_path(current_user), :flash => { :success => "Success! You can find your story below, in the 'Your Stories' section." }
     else
       redirect_to user_path(current_user), :flash => { :error => "Story cannot be blank and must be under 100 characters." }
     end
@@ -29,7 +29,7 @@ class StoriesController < ApplicationController
   end
 
 
-  
+
 
 private
 

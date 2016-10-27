@@ -10,7 +10,7 @@ class UpvotesController < ApplicationController
     end
   end
 
-
+  
 
 
 end
