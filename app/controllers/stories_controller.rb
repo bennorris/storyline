@@ -28,7 +28,15 @@ class StoriesController < ApplicationController
     @sentence = Sentence.new
   end
 
-
+  def destroy
+    story = Story.find_by_id(params[:id])
+    also_sentence = Sentence.find_by(content: story.content)
+    if also_sentence.also_story == true
+      also_sentence.destroy
+    end
+    story.destroy
+    redirect_to user_path(current_user)
+  end
 
 
 private
