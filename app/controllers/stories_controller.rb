@@ -31,11 +31,15 @@ class StoriesController < ApplicationController
   def destroy
     story = Story.find_by_id(params[:id])
     also_sentence = Sentence.find_by(content: story.content)
-    if also_sentence.also_story == true
+    if also_sentence.also_story == true && also_sentence.user_id == current_user.id
       also_sentence.destroy
     end
-    story.destroy
-    redirect_to user_path(current_user)
+    if story.user_id == current_user.id
+      story.destroy
+      redirect_to user_path(current_user)
+    else
+      redirect_to user_path(current_user), :flash => { :error => "You can only delete your own stories!" }
+    end
   end
 
 
