@@ -1,1 +1,10 @@
-
+<div class="stats-box">
+  <div class="edit-username-info">
+<h1>Update Your Username.</h1>
+<%=form_for(@user) do |f| %>
+  <%=f.text_field :username, :value => @user.username %><br>
+  <br>
+  <%=f.submit "Submit"%>
+  <%end%>
+</div>
+</div>

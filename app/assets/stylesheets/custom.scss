@@ -59,6 +59,15 @@ textarea {
   margin-top: 0.5%;
 }
 
+.logo-nav a {
+  color: white;
+}
+
+.logo-nav a:hover {
+  color: #FF8A80;
+  text-decoration:none;
+}
+
 /* USER SHOW PAGE STYLING */
 
 div.story-box {
@@ -420,4 +429,15 @@ div.stats-box-info {
 div.stats-box-info:hover {
   background-color: #0D47A1;
   color: white;
+}
+
+div.edit-username-info {
+  font-family: 'Didact Gothic', sans-serif;
+  font-size: 2em;
+  border: 20px solid orange;
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 10%;
+  padding: 2%;
+  padding-top: 1%;
 }

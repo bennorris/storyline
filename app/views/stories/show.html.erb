@@ -74,6 +74,7 @@
   <div class="story-started-by">
     <h3>Upvoted by:</h3>
     <br>
+    <%if @story.unique_upvotes.empty?%><p>None, yet</p><%end%>
     <p><%=@story.unique_upvotes.to_sentence %></p>
 
         <br>

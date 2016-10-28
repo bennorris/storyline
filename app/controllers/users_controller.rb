@@ -33,7 +33,19 @@ class UsersController < ApplicationController
     @upvotes = @user.all_upvotes
   end
 
+  def edit
+    @user = current_user
+  end
 
+  def update
+    @user = current_user
+    @user.username = params[:user][:username]
+    if @user.save
+      redirect_to user_stats_path(@user)
+    else
+      redirect_to edit_user_path(@user)
+    end
+  end
 
   def destroy
     session.clear

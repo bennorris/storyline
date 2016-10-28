@@ -1,7 +1,8 @@
 <div class="stats-box">
   <div class="stats-box-info">
-     <h1>User: <%=@user.username %></h1>
 
+     <h1>Username: <%if @user.username.nil?%><%=link_to("choose a username", edit_user_path(@user))%><%else%><%=@user.username%><%end%></h1>
+    Email: <%=@user.email%><br>
     Number of stories started:&nbsp;&nbsp;<%=@stories%><br>
     Number of sentences contributed:&nbsp;&nbsp;<%=@sentences%><br>
     Upvoted sentences:&nbsp;&nbsp;<%=@upvotes%><br>
