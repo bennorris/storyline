@@ -2,9 +2,9 @@
   <div class="stats-box-info">
      <h1>User: <%=@user.username %></h1>
 
-    Number of stories started:&nbsp;&nbsp;<%=@stories.size%><br>
-    Number of sentences contributed:&nbsp;&nbsp;<%=@sentences.size%><br>
-    Upvoted sentences:&nbsp;&nbsp;<%=@user.all_upvotes%><br>
+    Number of stories started:&nbsp;&nbsp;<%=@stories%><br>
+    Number of sentences contributed:&nbsp;&nbsp;<%=@sentences%><br>
+    Upvoted sentences:&nbsp;&nbsp;<%=@upvotes%><br>
     </div>
     <div class="back-to-profile">
       <%=link_to("Go back", user_path(current_user)) %>

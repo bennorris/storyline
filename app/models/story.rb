@@ -5,8 +5,8 @@ class Story < ApplicationRecord
   has_many :users, through: :sentences, :foreign_key => "user_id"
 
 
-  validates :content, presence: true
-  validates :content, length: { maximum: 100 }
+  validates :beginning, presence: true
+  validates :beginning, length: { maximum: 100 }
 
  def all_contributors
    users = {}
@@ -16,6 +16,10 @@ class Story < ApplicationRecord
      users[name] = contribution
    end
   users
+end
+
+def already_voted_story?
+  self.upvotes.include?(Upvote.find_by(user_id: yield, sentence_id: self.id))
 end
 
 

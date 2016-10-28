@@ -2,7 +2,7 @@
 
 <h1>The Story So Far:</h1>
 
-<h3><%=@story.content%></h3>
+<h3><%=@story.full_story%></h3>
 
 
 <%=form_for(@sentence, :url => story_sentences_path) do |f| %>
@@ -14,10 +14,16 @@
 <%=f.submit "Add Your Sentence" %>
 <% end %>
 
-  <h3>Contributors:  <br><%@story.sentences.each do |sentence| %>
-      <%=sentence.user.email %>: <%=sentence.content%><br>
-      <% end %>  </h3>
-<div class="back-button">
+  <h3>Contributors:  <br>
+
+  <%=@story.user.username%>: <%=@story.beginning %>
+  <%if @story.sentences.size > 1 %>
+    <%@story.sentences.each do |sentence| %>
+        <%=sentence.user.username %>: <%=sentence.content%><br>
+        <% end %>  </h3>
+    <% end %>
+    </h3>
+    <div class="back-button">
       <p><%=link_to("Back", user_path(current_user))%></p>
     </div>
 </div>

@@ -9,9 +9,9 @@
   <%if flash[:success]%><div class="flash-success"><%=flash[:success]%><br></div><%end%>
   <%=form_for(@story) do |f|%>
     <%if flash[:error].present?%>
-      <%=f.text_field :content, :maxlength => 100, :placeholder => "#{flash[:error]}" %>
+      <%=f.text_field :beginning, :maxlength => 100, :placeholder => "#{flash[:error]}" %>
     <% else %>
-      <%=f.text_field :content, :maxlength => 100, :placeholder => "What's the best sentence you have?" %>
+      <%=f.text_field :beginning, :maxlength => 100, :placeholder => "What's the best sentence you have?" %>
     <% end %>
     <%=f.submit "Start Story" %>
     <% end %>
@@ -24,17 +24,17 @@
     <%if !@all_stories.sample.nil?%>
       <%story = @all_stories.sample %>
       <div class="individual-story">
-        <%=story.content %> <br>
+        <%=story.full_story %> <br>
         <br>
-          <% if !story.sentences.last.nil?%>
-          <% if story.sentences.last.user_id == current_user.id %>
-
+          <% if story.sentences.last.nil? && story.user_id != current_user.id %>
+            <%=link_to("Add a Sentence", new_story_sentence_path(story.id)) %><br><br>
+          <%elsif story.sentences.last.nil? && story.user_id == current_user.id %>
               <p style="color: #EF9A9A">You were the most recent to contribute. You can add a new sentence after someone else has.</p>
-              <%else%>
+          <%else%>
             <%=link_to("Add a Sentence", new_story_sentence_path(story.id)) %><br><br>
             <% end %>
             <%=link_to "see contributors & more", story_path(story)  %><br>
-            <% end %>
+
             <br>
 
 
@@ -54,7 +54,7 @@
     <h3>None yet!</h3>
     <% end %>
 <%@user_stories.reverse.each do |story|%>
-    <h3><%=story.content%></h3>
+    <h3><%=story.beginning%></h3>
     <%=link_to("details", story_path(story)) %>&nbsp;&nbsp;|&nbsp;&nbsp;<%=link_to("delete", story_path(story), :method => :delete) %>
     <br>
           <%if !story.sentences.last.nil?%>

@@ -14,7 +14,6 @@ class UsersController < ApplicationController
   end
 
   def create
-
   end
 
   def show
@@ -23,7 +22,7 @@ class UsersController < ApplicationController
       @story = Story.new
       @all_stories = Story.all
       @user_stories = Story.all.select {|s| s.user == @user}
-      @user_contributions = @user.sentences.select {|s| s.also_story == false }
+      @user_contributions = @user.sentences
     else
       redirect_to user_path(current_user)
     end
@@ -31,8 +30,9 @@ class UsersController < ApplicationController
 
   def stats
     @user = User.find_by_id(params[:id])
-    @stories = @user.stories
-    @sentences = @user.sentences.select { |s| s.also_story == false }
+    @stories = @user.stories.size
+    @sentences = @user.sentences.size
+    @upvotes = @user.all_upvotes
   end
 
 

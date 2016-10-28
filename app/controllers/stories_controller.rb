@@ -3,11 +3,10 @@ class StoriesController < ApplicationController
 
   def create
     @story = current_user.stories.build(story_params)
-
+    @story.full_story = @story.beginning
+    
     if @story.save
-      sentence = @story.sentences.build(user_id: current_user.id, story_id: @story.id, content: @story.content)
-      sentence.also_story = true
-      sentence.save
+
       redirect_to user_path(current_user), :flash => { :success => "Success! You can find your story below, in the 'Your Stories' section." }
     else
       redirect_to user_path(current_user), :flash => { :error => "Story cannot be blank and must be under 100 characters." }
@@ -30,11 +29,9 @@ class StoriesController < ApplicationController
 
   def destroy
     story = Story.find_by_id(params[:id])
-    also_sentence = Sentence.find_by(content: story.content)
-    if also_sentence.also_story == true && also_sentence.user_id == current_user.id
-      also_sentence.destroy
-    end
+
     if story.user_id == current_user.id
+      #need to also destroy the sentences associated with the story
       story.destroy
       redirect_to user_path(current_user)
     else
@@ -46,12 +43,12 @@ class StoriesController < ApplicationController
 private
 
   def story_params
-    params.require(:story).permit(:content)
+    params.require(:story).permit(:beginning)
   end
 
   def add_to_story
     @story = Story.find_by_id(params[:id])
-    @story.content = @story.content + " " + story_params[:content]
+    @story.full_story = @story.full_story + " " + story_params[:beginning]
     @story.users << current_user
     @story.save
   end

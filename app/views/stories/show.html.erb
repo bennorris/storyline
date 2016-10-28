@@ -4,30 +4,52 @@
 <h1>The Story So Far:</h1>
 <div class="the-story-in-show">
 
-  <p><%=@story.content %></p>
+  <p><%=@story.full_story %></p>
   <br>
     <p class="upvotes">total upvotes: <%=@story.upvotes.size%></p>
-    <% if @story.sentences.last.user != current_user %>
-  <%=form_for @sentence, :url => story_sentences_path(@story.id) do |f| %>
-    <%=f.text_field :content %>
-    <%=f.submit "Add your sentence" %>
-    <% end %>
-    <%end%>
+    <% if !@story.sentences.last.nil? %>
+      <% if @story.sentences.last.user != current_user %>
+        <%=form_for @sentence, :url => story_sentences_path(@story.id) do |f| %>
+        <%=f.text_field :content %>
+        <%=f.submit "Add your sentence" %>
+          <% end %>
+        <%end%>
+        <% end %>
 
   <br>
     <div class="story-started-by">
-  <h3>Started by:</h3><p><%=@story.user.email%></p><br>
+  <h3>Started by:</h3><p><%=@story.user.username%></p><br>
   </div>
+
   <h3>Contributors:</h3>
   <div class="contributors-box">
+    <div class="contributor-2">
+      <p><%=@story.user.username%>:&nbsp;&nbsp;<%=link_to "#{@story.beginning}", story_path(@story) %><br>
+    </div>
+    <% if @story.already_voted_story? { current_user.id } %>
+    <%if flash[:success].present?%>
+      <%=flash[:success] %>
+    <%elsif flash[:error].present?%>
+      <%=flash[:error]%>
+      <% end %>
+      <p class="upvotes">you upvoted this!&nbsp;&nbsp;|&nbsp;&nbsp;
+    <% else %>
+    <p class="upvotes"><%=link_to "upvote", story_upvotes_path(@story), :method => :post %>&nbsp;&nbsp;|&nbsp;&nbsp;
+  <%end%>
+    total upvotes: <%=@story.upvotes.size%></p><br>
+    <br>
+
+
+
     <%count = 1 %>
-    <p><%@story.all_contributors.each do |name, sentence| %>
+    <p><%@story.sentences.each do |sentence| %>
       <%if count.odd?%>
         <div class="contributor-1">
       <%else%>
         <div class="contributor-2">
-      <%end%>
-      <%=name.email%>:&nbsp;&nbsp;<%=link_to "#{sentence.content}", story_sentence_path(@story, sentence) %><br>
+      <% end %>
+
+      <%=sentence.user.username%>:&nbsp;&nbsp;<%=link_to "#{sentence.content}", story_sentence_path(@story, sentence) %><br>
 
           <% if sentence.already_voted? { current_user.id } %>
           <%if flash[:success].present?%>
