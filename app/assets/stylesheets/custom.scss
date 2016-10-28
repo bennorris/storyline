@@ -40,6 +40,10 @@ textarea {
   color: white;
 }
 
+.navbar-right {
+  padding-right: 2%;
+}
+
 .navbar-default .navbar-nav > li > a:hover {
   color: #FF8A80;
 }
@@ -48,8 +52,8 @@ textarea {
   text-decoration: none;
   color: white;
   font-family: 'Bungee', cursive;
-  text-align:right;
-  padding-right: 2%;
+  text-align:left;
+  padding-left: 2%;
   font-size: 2em;
   list-style-type: none;
   margin-top: 0.5%;
@@ -415,5 +419,5 @@ div.stats-box-info {
 
 div.stats-box-info:hover {
   background-color: #0D47A1;
-  color: white; 
+  color: white;
 }
