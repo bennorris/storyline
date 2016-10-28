@@ -18,7 +18,7 @@
 
   <br>
     <div class="story-started-by">
-  <h3>Started by:</h3><p><%=@story.user.username%></p><br>
+  <h3>Started by:</h3><br><p><%=@story.user.username%></p><br>
   </div>
 
   <h3>Contributors:</h3>
@@ -73,9 +73,9 @@
 
   <div class="story-started-by">
     <h3>Upvoted by:</h3>
-    <p><%@story.all_upvotes.each do |vote| %>
-        <%=vote%>,
-        <%end%></p>
+    <br>
+    <p><%=@story.all_upvotes.to_sentence %></p>
+
         <br>
         <br>
   </div>
