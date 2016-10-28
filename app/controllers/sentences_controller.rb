@@ -34,6 +34,9 @@ class SentencesController < ApplicationController
   def destroy
     #need to edit the content within the story to remove this sentence.
     sentence = Sentence.find_by_id(params[:id])
+    story = Story.find_by(params[:story_id])
+    story.full_story = story.full_story.gsub("#{sentence.content}", "")
+    story.save
     sentence.destroy
     redirect_to user_path(current_user), :flash => { :deleted => "Successfully deleted post."}
   end

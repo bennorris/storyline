@@ -36,10 +36,7 @@
             <%=link_to("Add a Sentence", new_story_sentence_path(story.id)) %><br><br>
             <% end %>
             <%=link_to "see contributors & more", story_path(story)  %><br>
-
             <br>
-
-
             <%=link_to("NEXT", user_path(current_user))%>
             <%else%>
             Nothing here, yet!
@@ -71,6 +68,7 @@
 
 <div class="your-contributions-box">
 <h2>Your Contributions</h2>
+  <% if @user_contributions.size < 1 %> None, yet! <% end %>
 
   <% @user_contributions.reverse.each do |sentence| %>
       <p><%=sentence.content%></p>
