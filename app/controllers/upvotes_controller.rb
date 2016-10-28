@@ -1,6 +1,7 @@
 class UpvotesController < ApplicationController
 
   def create
+    binding.pry 
     @upvote = Upvote.new(user_id: current_user.id, sentence_id: params[:sentence_id])
     @story = Story.find_by_id(params[:story_id])
     if @upvote.save
@@ -10,7 +11,7 @@ class UpvotesController < ApplicationController
     end
   end
 
-  
+
 
 
 end

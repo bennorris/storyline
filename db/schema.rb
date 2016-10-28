@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161028141949) do
+ActiveRecord::Schema.define(version: 20161028153625) do
 
   create_table "sentences", force: :cascade do |t|
     t.integer  "user_id"
@@ -37,7 +37,8 @@ ActiveRecord::Schema.define(version: 20161028141949) do
 
   create_table "upvotes", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "sentence_id"
+    t.integer "upvotable_id"
+    t.string  "upvotable_type"
   end
 
   create_table "users", force: :cascade do |t|

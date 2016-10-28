@@ -23,6 +23,7 @@
 
   <h3>Contributors:</h3>
   <div class="contributors-box">
+    <!--FIRST SENTENCE IS THE STORY BEGINNING -->
     <div class="contributor-2">
       <p><%=@story.user.username%>:&nbsp;&nbsp;<%=link_to "#{@story.beginning}", story_path(@story) %><br>
     </div>
@@ -39,8 +40,7 @@
     total upvotes: <%=@story.upvotes.size%></p><br>
     <br>
 
-
-
+    <!--END STORY BEGINNING, MOVE TO STORY SENTENCES -->
     <%count = 1 %>
     <p><%@story.sentences.each do |sentence| %>
       <%if count.odd?%>
@@ -59,7 +59,7 @@
             <% end %>
             <p class="upvotes">you upvoted this!&nbsp;&nbsp;|&nbsp;&nbsp;
           <% else %>
-          <p class="upvotes"><%=link_to "upvote", story_sentence_upvotes_path(@story.id, sentence.id), :method => :post %>&nbsp;&nbsp;|&nbsp;&nbsp;
+          <p class="upvotes"><%=link_to "upvote", story_sentence_upvotes(@story, sentence), :method => :post %>&nbsp;&nbsp;|&nbsp;&nbsp;
         <%end%>
           total upvotes: <%=sentence.upvotes.size%></p><br>
           <br>

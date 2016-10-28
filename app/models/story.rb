@@ -1,7 +1,7 @@
 class Story < ApplicationRecord
   belongs_to :user
   has_many :sentences
-  has_many :upvotes, through: :sentences
+  has_many :upvotes, :as => :upvotable
   has_many :users, through: :sentences, :foreign_key => "user_id"
 
 
@@ -19,7 +19,7 @@ class Story < ApplicationRecord
 end
 
 def already_voted_story?
-  self.upvotes.include?(Upvote.find_by(user_id: yield, sentence_id: self.id))
+  self.upvotes.include?(Upvote.find_by(user_id: yield, upvotable_id: self.id))
 end
 
 

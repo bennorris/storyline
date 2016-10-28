@@ -1,6 +1,4 @@
 class Upvote < ApplicationRecord
-  belongs_to :user
-  belongs_to :sentence
-
+  belongs_to :upvotable, :polymorphic => true
 
 end
