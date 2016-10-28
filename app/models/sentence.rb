@@ -7,7 +7,7 @@ class Sentence < ApplicationRecord
   validates :content, length: { maximum: 100 }
 
   def already_voted?
-    self.upvotes.include?(Upvote.find_by(user_id: yield, upvotable_id: self.id))
+    self.upvotes.include?(Upvote.find_by(user_id: yield, upvotable_id: self.id, upvotable_type: "Sentence"))
   end
 
 

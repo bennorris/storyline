@@ -19,7 +19,7 @@ class Story < ApplicationRecord
 end
 
 def already_voted_story?
-  self.upvotes.include?(Upvote.find_by(user_id: yield, upvotable_id: self.id))
+  self.upvotes.include?(Upvote.find_by(user_id: yield, upvotable_id: self.id, upvotable_type: "Story"))
 end
 
 
