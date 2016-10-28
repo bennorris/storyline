@@ -36,5 +36,9 @@ end
     users
   end
 
+  def unique_upvotes
+    all_upvotes.uniq
+  end
+
 
 end

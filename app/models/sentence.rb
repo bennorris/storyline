@@ -10,5 +10,12 @@ class Sentence < ApplicationRecord
     self.upvotes.include?(Upvote.find_by(user_id: yield, upvotable_id: self.id, upvotable_type: "Sentence"))
   end
 
+  def sentence_upvotes
+    users = []
+    self.upvotes.each do |vote|
+        users << User.find_by_id(vote.user_id).username
+      end
+      users 
+  end
 
 end

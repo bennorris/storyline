@@ -6,7 +6,7 @@
 
   <p><%=@story.full_story %></p>
   <br>
-    <p class="upvotes">total upvotes: <%=@story.upvotes.size%></p>
+    <p class="upvotes">total upvotes: <%=@story.all_upvotes.size%></p>
     <% if !@story.sentences.last.nil? %>
       <% if @story.sentences.last.user != current_user %>
         <%=form_for @sentence, :url => story_sentences_path(@story.id) do |f| %>
@@ -74,7 +74,7 @@
   <div class="story-started-by">
     <h3>Upvoted by:</h3>
     <br>
-    <p><%=@story.all_upvotes.to_sentence %></p>
+    <p><%=@story.unique_upvotes.to_sentence %></p>
 
         <br>
         <br>

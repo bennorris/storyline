@@ -30,7 +30,9 @@
             <%=link_to("Add a Sentence", new_story_sentence_path(story.id)) %><br><br>
           <%elsif story.sentences.last.nil? && story.user_id == current_user.id %>
               <p style="color: #EF9A9A">You were the most recent to contribute. You can add a new sentence after someone else has.</p>
-          <%else%>
+          <%elsif story.sentences.last.user == current_user %>
+              <p style="color: #EF9A9A">You were the most recent to contribute. You can add a new sentence after someone else has.</p>
+          <% else %>
             <%=link_to("Add a Sentence", new_story_sentence_path(story.id)) %><br><br>
             <% end %>
             <%=link_to "see contributors & more", story_path(story)  %><br>

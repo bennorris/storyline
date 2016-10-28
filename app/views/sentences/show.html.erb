@@ -10,6 +10,12 @@
 <p class="individual-sentence">Upvotes:</p><p><%=@sentence.upvotes.size%></p>
 </div>
 <div class="sentence-box">
+<p class="individual-sentence">Upvoted By:</p>
+<p><%if @upvotes.empty?%>None, yet.</p><%else%>
+<p><%=@upvotes.to_sentence%></p>
+<%end%>
+</div>
+<div class="sentence-box">
 <p class="individual-sentence">Created on:</p><p><%=@created%></p>
 </div>
 
