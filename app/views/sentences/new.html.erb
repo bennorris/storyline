@@ -17,6 +17,7 @@
   <h3>Contributors:  <br>
 
   <%=@story.user.username%>: <%=@story.beginning %><br>
+
   <%if @story.sentences.size > 0 %>
     <%@story.sentences.each do |sentence| %>
         <%=sentence.user.username %>: <%=sentence.content%><br>

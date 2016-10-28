@@ -23,4 +23,18 @@ def already_voted_story?
 end
 
 
+  def all_upvotes
+    users = []
+    self.upvotes.each do |vote|
+        users << User.find_by_id(vote.user_id).username
+      end
+    self.sentences.each do |sentence|
+      sentence.upvotes.each do |vote|
+        users << User.find_by_id(vote.user_id).username
+      end
+    end
+    users
+  end
+
+
 end

@@ -12,6 +12,9 @@ class User < ApplicationRecord
     self.sentences.each do |sentence|
       count+= sentence.upvotes.size.to_i
     end
+    self.stories.each do |story|
+      count+=story.upvotes.size.to_i
+    end
     count
   end
 

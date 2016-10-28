@@ -66,7 +66,21 @@
         <%count+=1%></div>
         <%end%></p>
       </div>
-</div>
+    </div>
+    <!--END CONTRIBUTORS -->
+
+    <!--START UPVOTES USERS LIST -->
+
+  <div class="story-started-by">
+    <h3>Upvoted by:</h3>
+    <p><%@story.all_upvotes.each do |vote| %>
+        <%=vote%>,
+        <%end%></p>
+        <br>
+        <br>
+  </div>
+
+
 <br>
 <br>
 <div class="back-to-profile">
