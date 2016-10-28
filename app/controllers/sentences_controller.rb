@@ -8,9 +8,15 @@ class SentencesController < ApplicationController
   def create
     story = Story.find_by_id(params[:story_id])
     new_sentence = story.sentences.build(sentence_params)
+    new_sentence.user = current_user
 
     if new_sentence.save
-      story.full_story = story.beginning + " " + new_sentence.content
+
+      if story.sentences.size == 1
+        story.full_story = story.beginning + " " + new_sentence.content
+      else
+        story.full_story = story.full_story + " " + new_sentence.content
+      end
       story.save
       redirect_to story_path(story)
     else
