@@ -16,11 +16,15 @@ class Sentence < ApplicationRecord
         user = User.find_by_id(vote.user_id)
         if user && user.username
           users << user.username
-        elsif user && user.email 
+        elsif user && user.email
           users << user.email
         end
       end
       users
   end
+
+  
+
+
 
 end

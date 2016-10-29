@@ -27,7 +27,7 @@ end
     users = []
     self.upvotes.each do |vote|
         user = User.find_by_id(vote.user_id)
-      
+
         if user && user.username
           users << user.username
         elsif user && user.email
@@ -50,6 +50,15 @@ end
 
   def unique_upvotes
     all_upvotes.uniq
+  end
+
+  def last_to_post?(user)
+    if self.sentences.size > 0
+      self.sentences.last.user == user
+    else
+      self.user == user
+    end
+
   end
 
 

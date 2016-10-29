@@ -7,20 +7,17 @@ class SentencesController < ApplicationController
 
   def create
     story = Story.find_by_id(params[:story_id])
-    new_sentence = story.sentences.build(sentence_params)
-    new_sentence.user = current_user
+    if !story.last_to_post?(current_user)
+      new_sentence = story.sentences.build(sentence_params)
+      new_sentence.user = current_user
 
-    if new_sentence.save
-
-      if story.sentences.size == 1
-        story.full_story = story.beginning + " " + new_sentence.content
+      if new_sentence.save
+        story.sentences.size == 1 ? story.full_story = story.beginning + " " + new_sentence.content : story.full_story = story.full_story + " " + new_sentence.content
+        story.save
+        redirect_to story_path(story)
       else
-        story.full_story = story.full_story + " " + new_sentence.content
+        redirect_to new_story_sentence_path, :flash => { :error => "Sentence cannot be blank and must be under 100 characters." }
       end
-      story.save
-      redirect_to story_path(story)
-    else
-      redirect_to new_story_sentence_path, :flash => { :error => "Sentence cannot be blank and must be under 100 characters." }
     end
   end
 
