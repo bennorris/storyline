@@ -13,9 +13,14 @@ class Sentence < ApplicationRecord
   def sentence_upvotes
     users = []
     self.upvotes.each do |vote|
-        users << User.find_by_id(vote.user_id).username
+        user = User.find_by_id(vote.user_id)
+        if user && user.username
+          users << user.username
+        elsif user && user.email 
+          users << user.email
+        end
       end
-      users 
+      users
   end
 
 end
