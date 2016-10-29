@@ -38,12 +38,16 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = current_user
-    @user.username = params[:user][:username]
-    if @user.save
-      redirect_to user_stats_path(@user)
+    if current_user.id.to_i == params[:id].to_i
+      @user = current_user
+      @user.username = params[:user][:username]
+        if @user.save
+          redirect_to user_stats_path(@user)
+        else
+          redirect_to edit_user_path(@user)
+        end
     else
-      redirect_to edit_user_path(@user)
+      redirect_to user_stats_path(current_user)
     end
   end
 

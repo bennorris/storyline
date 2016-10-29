@@ -6,7 +6,9 @@
     Number of stories started:&nbsp;&nbsp;<%=@stories%><br>
     Number of sentences contributed:&nbsp;&nbsp;<%=@sentences%><br>
     Upvoted sentences:&nbsp;&nbsp;<%=@upvotes%><br>
+<%if !@user.username.nil? && @user.id == current_user.id%><%=link_to "edit username", edit_user_path(@user) %><%end%>
     </div>
+
     <div class="back-to-profile">
       <%=link_to("Go back", user_path(current_user)) %>
   </div>
