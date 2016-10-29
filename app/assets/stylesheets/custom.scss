@@ -209,6 +209,26 @@ div.login-or-signup h2 {
   font-size: 60px;
 }
 
+div.social-login {
+  width: 100%;
+}
+
+span.social-button {
+  background: #3b5998;
+  border: 1px solid #3b5998;
+  padding: 4px;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+span.social-button a {
+  color:white;
+}
+
+span.social-button a:hover {
+  color: #FF8A80;
+}
+
 /* NEW SENTENCE TO EXISTING STORY - SENTENCE/NEW */
 
 

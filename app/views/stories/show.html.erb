@@ -5,6 +5,7 @@
 <div class="the-story-in-show">
 
   <p><%=@story.full_story %></p>
+
   <br>
     <p class="upvotes">total upvotes: <%=@story.all_upvotes.size%></p>
     <% if !@story.sentences.last.nil? %>
