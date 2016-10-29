@@ -377,6 +377,21 @@ div.story-show-page p.upvotes {
   font-size: 20px;
 }
 
+div.add-sentence-from-story-page {
+  width: 100%;
+  margin-top: 2%;
+  font-family: 'Didact Gothic', sans-serif;
+}
+
+div.add-sentence-from-story-page input[type="text"] {
+  width: 50%;
+}
+
+div.add-sentence-from-story-page input[type="submit"]:hover{
+  color: white;
+  background: #0D47A1;
+  border: 2px solid white;
+}
 /* SENTENCE SHOW PAGE */
 
 div.sentence-show-page {

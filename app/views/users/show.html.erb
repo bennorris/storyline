@@ -19,11 +19,12 @@
 
 <div class="other-stories-box">
     <h2> Add to a different story. </h2>
-
+  
     <%if !@all_stories.sample.nil?%>
       <%story = @all_stories.sample %>
       <div class="individual-story">
-        <%=story.full_story %> <br>
+
+        <%=story.full_story.nil? ? story.beginning : story.full_story %> <br>
         <br>
           <% if story.sentences.last.nil? && story.user_id != current_user.id %>
             <%=link_to("Add a Sentence", new_story_sentence_path(story.id)) %><br><br>

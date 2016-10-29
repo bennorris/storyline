@@ -6,7 +6,6 @@ class StoriesController < ApplicationController
     @story.full_story = @story.beginning
 
     if @story.save
-
       redirect_to user_path(current_user), :flash => { :success => "Success! You can find your story below, in the 'Your Stories' section." }
     else
       redirect_to user_path(current_user), :flash => { :error => "Story cannot be blank and must be under 100 characters." }
