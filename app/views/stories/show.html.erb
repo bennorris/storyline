@@ -35,7 +35,7 @@
   <div class="contributors-box">
     <!--FIRST SENTENCE IS THE STORY BEGINNING -->
     <div class="contributor-2">
-      <p><%=@story.user.username%>:&nbsp;&nbsp;<%=link_to "#{@story.beginning}", story_path(@story) %><br>
+      <p><%=link_to "#{@story.user.username}", user_stats_path(@story.user)%>:&nbsp;&nbsp;<%=link_to "#{@story.beginning}", story_path(@story) %><br>
 
     <% if @story.already_voted_story? { current_user.id } %>
     <%if flash[:success].present?%>
@@ -61,7 +61,7 @@
       <% end %>
 
       <%if sentence.user %>
-      <p><%=sentence.user.username%>:&nbsp;&nbsp;<%=link_to "#{sentence.content}", story_sentence_path(@story, sentence) %></p><br>
+      <p><%=link_to "#{sentence.user.username}", user_stats_path(sentence.user)%>:&nbsp;&nbsp;<%=link_to "#{sentence.content}", story_sentence_path(@story, sentence) %></p><br>
 
           <% if sentence.already_voted? { current_user.id } %>
           <%if flash[:success].present?%>

@@ -156,6 +156,8 @@ div.other-stories-box {
 
 div.individual-story {
   margin-top: 2em;
+  padding-left: 2%;
+  padding-right: 2%;
 }
 
 div.individual-story a {
@@ -351,8 +353,16 @@ div.contributor-1 a {
   color: #B71C1C;
 }
 
+div.contributor-1 a:first-child {
+  color: #1A237E;
+}
+
 div.contributor-2 a {
   color: #1A237E;
+}
+
+div.contributor-2 a:first-child {
+  color: #B71C1C;
 }
 
 div.back-to-profile {
