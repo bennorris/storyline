@@ -36,7 +36,7 @@
     <!--FIRST SENTENCE IS THE STORY BEGINNING -->
     <div class="contributor-2">
       <p><%=@story.user.username%>:&nbsp;&nbsp;<%=link_to "#{@story.beginning}", story_path(@story) %><br>
-    </div>
+
     <% if @story.already_voted_story? { current_user.id } %>
     <%if flash[:success].present?%>
       <%=flash[:success] %>
@@ -48,6 +48,7 @@
     <p class="upvotes"><%=link_to "upvote", story_upvotes_path(@story), :method => :post %>&nbsp;&nbsp;|&nbsp;&nbsp;
   <%end%>
     total upvotes: <%=@story.upvotes.size%></p><br>
+    </div>
     <br>
 
     <!--END STORY BEGINNING, MOVE TO STORY SENTENCES -->
