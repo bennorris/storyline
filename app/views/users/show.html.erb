@@ -6,7 +6,7 @@
 <br>
 <p>
   <%if flash[:success]%><div class="flash-success"><%=flash[:success]%><br></div><%end%>
-
+  <%if flash[:failure]%><div class="flash-success"><%=flash[:failure]%><br></div><%end%>
   <%=form_for @genre do |f| %>
     <%=fields_for :story do |g| %>
     <%if flash[:error].present?%>
