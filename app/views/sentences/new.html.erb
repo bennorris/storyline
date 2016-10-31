@@ -14,13 +14,13 @@
 <%=f.submit "Add Your Sentence" %>
 <% end %>
 
-  <h3>Contributors:  <br>
+  <h3>Contributors:  <br><br>
 
-  <%=@story.user.username%>: <%=@story.beginning %><br>
+  <%=@story.user.username%>: <%=@story.beginning %><br><br>
 
   <%if @story.sentences.size > 0 %>
     <%@story.sentences.each do |sentence| %>
-        <%=sentence.user.username %>: <%=sentence.content%><br>
+        <%=sentence.user.username %>: <%=sentence.content%><br><br>
         <% end %>  </h3>
     <% end %>
     </h3>

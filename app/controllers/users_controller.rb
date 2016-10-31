@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   def show
     if current_user.id.to_i == params[:id].to_i
       @user = current_user
+      @genre = Genre.new
       @story = Story.new
       @all_stories = Story.all
       @user_stories = Story.all.select {|s| s.user == @user}

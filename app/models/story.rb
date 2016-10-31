@@ -1,5 +1,6 @@
 class Story < ApplicationRecord
   belongs_to :user
+  belongs_to :genre
   has_many :sentences
   has_many :upvotes, :as => :upvotable
   has_many :users, through: :sentences, :foreign_key => "user_id"

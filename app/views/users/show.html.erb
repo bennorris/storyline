@@ -6,20 +6,45 @@
 <br>
 <p>
   <%if flash[:success]%><div class="flash-success"><%=flash[:success]%><br></div><%end%>
-  <%=form_for(@story) do |f|%>
+
+  <%=form_for @genre do |f| %>
+    <%=fields_for :story do |g| %>
+    <%if flash[:error].present?%>
+      <%=g.text_field :beginning, :maxlength => 100, :placeholder => "#{flash[:error]}" %>
+    <% else %>
+      <%=g.text_field :beginning, :maxlength => 100, :placeholder => "What's the best sentence you have?" %>
+    <% end %>
+      <% end %>
+      <br>
+      <%if flash[:genre_error].present?%>
+        <%=f.text_field :name, :placeholder => "#{flash[:genre_error]}" %>
+      <%else%>
+        <%=f.text_field :name, :placeholder => "Add a genre here" %>
+      <% end %>
+    <%=f.submit "Start Story"%>
+    <% end %>
+
+
+<!--I AM GOING TO REPLACE THE ABOVE FORM WITH THIS AFTER THE ASSESSMENT - JUST NEEDED A NESTED FORM TO MEET THE REQUIREMENTS -->
+
+  <!-- <%=form_for(@story) do |f|%>
     <%if flash[:error].present?%>
       <%=f.text_field :beginning, :maxlength => 100, :placeholder => "#{flash[:error]}" %>
     <% else %>
       <%=f.text_field :beginning, :maxlength => 100, :placeholder => "What's the best sentence you have?" %>
     <% end %>
+    <br>
+      <%=fields_for :genre do |g|%>
+        <%=g.text_field :name, :placeholder => "Add a genre here."%>
+        <%end%>
     <%=f.submit "Start Story" %>
-    <% end %>
+    <% end %> -->
 </p>
 </div>
 
 <div class="other-stories-box">
     <h2> Add to a different story. </h2>
-  
+
     <%if !@all_stories.sample.nil?%>
       <%story = @all_stories.sample %>
       <div class="individual-story">
