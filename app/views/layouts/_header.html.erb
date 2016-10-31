@@ -1,5 +1,16 @@
 <nav class="navbar navbar-right navbar-default navbar-fixed-top">
   <div class="nav-container">
+
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+       <span class="sr-only">Toggle Navigation</span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+     </button>
+
+
+
+    <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right header-links">
         <li><%=link_to("Home", root_path)%></li>
         <%if current_user%>
@@ -10,9 +21,10 @@
           <li><%=link_to("Sign Up", new_user_registration_path)%></li>
           <% end %>
           </ul>
+          
             <li class="logo-nav"><%=link_to("STORYLINE.", root_path)%></li>
-
         </div>
+      </div>
 
 
 
