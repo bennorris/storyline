@@ -2,6 +2,11 @@ class SentencesController < ApplicationController
 
   def new
     @story = Story.find_by_id(params[:story_id])
+    
+    if @story.last_to_post?(current_user)
+      redirect_to user_path(current_user)
+    end
+
     @sentence = Sentence.new
   end
 

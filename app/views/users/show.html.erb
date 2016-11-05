@@ -44,7 +44,6 @@
 <div class="other-stories-box">
     <h2> Add to a different story. </h2>
 
-
       <%story = @all_stories.sample %>
       <div class="individual-story">
         <div id="story-preview">
@@ -63,6 +62,7 @@
             <%=link_to("Add a Sentence", new_story_sentence_path(story.id)) %><br><br>
             <% end %>
             <%=link_to "see contributors & more", story_path(story)  %><br>
+
         <%content_for :head do %>
               <script type="text/javascript">
               $(document).on('click', '#next-button', function() {

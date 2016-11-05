@@ -2,7 +2,11 @@
 
 <h1>The Story So Far:</h1>
 
-<h3><%=@story.full_story%></h3>
+<%if @story.full_story.nil?%>
+  <h3><%=@story.beginning%></h3>
+<%else%>
+  <h3><%=@story.full_story%></h3>
+<%end%>
 
 
 <%=form_for(@sentence, :url => story_sentences_path) do |f| %>
