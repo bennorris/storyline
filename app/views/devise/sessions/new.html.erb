@@ -1,6 +1,23 @@
 <div class="login-or-signup">
 
 <h2>Log in</h2>
+<%if devise_error_messages!%>
+  <div class="login-error">
+  <% flash.each do |name, msg| %>
+    <% if msg.class == Array %>
+      <% msg.each do |message| %>
+        <%= content_tag :div, message, :id => "flash_#{name}" %>
+      <% end %>
+    <% else %>
+      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+    <% end %>
+  <% end %>
+    </div>
+  <%end%>
+
+
+
+
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">

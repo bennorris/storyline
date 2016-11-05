@@ -497,9 +497,14 @@ div.stats-box-info a:hover {
   color: orange;
 }
 
+/* LOGIN */
+
+div.login-error {
+  color: red;
+}
+
 /* ////// MOBILE VERSION ///////// */
 
 @media only screen and (max-device-width: 692px) {
-
 
 }
