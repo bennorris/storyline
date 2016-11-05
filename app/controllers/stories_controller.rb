@@ -32,9 +32,8 @@ class StoriesController < ApplicationController
     story = Story.find_by_id(params[:id])
 
     if story.user_id == current_user.id
-      #need to also destroy the sentences associated with the story
       story.destroy
-      redirect_to user_path(current_user)
+      redirect_to user_path(current_user), :flash => { :success => "Your story has been deleted!" }
     else
       redirect_to user_path(current_user), :flash => { :error => "You can only delete your own stories!" }
     end
