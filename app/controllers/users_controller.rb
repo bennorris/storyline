@@ -22,6 +22,7 @@ class UsersController < ApplicationController
       @all_stories = Story.all
       @user_stories = Story.all.select {|s| s.user == @user}
       @user_contributions = @user.sentences
+      @stories_for_js = Story.all_content(@user).to_json
     else
       redirect_to user_path(current_user)
     end

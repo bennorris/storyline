@@ -62,5 +62,17 @@ end
 
   end
 
+  def self.all_content(user)
+    content = []
+    self.all.map do |story|
+      if story.sentences.length > 1
+        content << [story.full_story, story.id, story.last_to_post?(user)]
+      else
+        content << [story.beginning, story.id, story.last_to_post?(user)]
+      end
+    end
+    content
+  end
+
 
 end
