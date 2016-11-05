@@ -32,17 +32,19 @@
   </div>
 
   <h3>Contributors:</h3>
+  <%if flash[:success].present?%>
+    <p><%=flash[:success] %></p>
+  <%elsif flash[:error].present?%>
+    <p><%=flash[:error]%></p>
+    <% end %>
+
   <div class="contributors-box">
     <!--FIRST SENTENCE IS THE STORY BEGINNING -->
     <div class="contributor-2">
-      <p><%=link_to "#{@story.user.username}", user_stats_path(@story.user)%>:&nbsp;&nbsp;<%=link_to "#{@story.beginning}", story_path(@story) %><br>
+      <p><%=link_to "#{@story.user.username}", user_stats_path(@story.user)%>:&nbsp;&nbsp;<%=link_to "#{@story.beginning}", story_path(@story) %></p><br>
 
     <% if @story.already_voted_story? { current_user.id } %>
-    <%if flash[:success].present?%>
-      <%=flash[:success] %>
-    <%elsif flash[:error].present?%>
-      <%=flash[:error]%>
-      <% end %>
+
       <p class="upvotes">you upvoted this!&nbsp;&nbsp;|&nbsp;&nbsp;
     <% else %>
     <p class="upvotes"><%=link_to "upvote", story_upvotes_path(@story), :method => :post %>&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -64,11 +66,7 @@
       <p><%=link_to "#{sentence.user.username}", user_stats_path(sentence.user)%>:&nbsp;&nbsp;<%=link_to "#{sentence.content}", story_sentence_path(@story, sentence) %></p><br>
 
           <% if sentence.already_voted? { current_user.id } %>
-          <%if flash[:success].present?%>
-            <%=flash[:success] %>
-          <%elsif flash[:error].present?%>
-            <%=flash[:error]%>
-            <% end %>
+
             <p class="upvotes">you upvoted this!&nbsp;&nbsp;|&nbsp;&nbsp;
           <% else %>
           <p class="upvotes"><%=link_to "upvote", story_sentence_upvotes_path(@story, sentence), :method => :post %>&nbsp;&nbsp;|&nbsp;&nbsp;
