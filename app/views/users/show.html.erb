@@ -116,6 +116,10 @@
 
   <% @user_contributions.reverse.each do |sentence| %>
       <p><%=sentence.content%></p>
+      <%if sentence.story%>
       <%=link_to("full story", story_path(sentence.story)) %>&nbsp;&nbsp;|&nbsp;&nbsp;<%=link_to("delete", story_sentence_path(sentence.story, sentence), :method => :delete) %>
+      <%else%>
+      <p class="red" style="color: red">this story was deleted</p>
       <% end %>
+    <% end %>
 </div>
