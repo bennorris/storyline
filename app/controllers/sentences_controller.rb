@@ -2,7 +2,7 @@ class SentencesController < ApplicationController
 
   def new
     @story = Story.find_by_id(params[:story_id])
-    
+
     if @story.last_to_post?(current_user)
       redirect_to user_path(current_user)
     end
@@ -23,6 +23,8 @@ class SentencesController < ApplicationController
       else
         redirect_to new_story_sentence_path, :flash => { :error => "Sentence cannot be blank and must be under 100 characters." }
       end
+    else
+      redirect_to user_path(current_user)
     end
   end
 
@@ -34,7 +36,6 @@ class SentencesController < ApplicationController
   end
 
   def destroy
-    #need to edit the content within the story to remove this sentence.
     sentence = Sentence.find_by_id(params[:id])
     story = Story.find_by(params[:story_id])
     story.full_story = story.full_story.gsub("#{sentence.content}", "")
