@@ -1,4 +1,8 @@
 <%= javascript_include_tag 'home_page' %>
+<script type="text/javascript" charset="utf-8">
+  var storiesArray = <%=raw @stories_for_js%>
+</script>
+
 <div class="story-box">
 <h2>Start a new story.</h2>
 <br>
@@ -62,25 +66,10 @@
             <% end %>
             <%=link_to "see contributors & more", story_path(story)  %><br>
 
-        <!-- <%content_for :head do %>
-              <script type="text/javascript">
-              $(document).on('click', '#next-button', function() {
-                  $('#story-preview').empty();
-                  var storiesArray = <%=raw @stories_for_js%>
-                  var rand = storiesArray[Math.floor(Math.random() * storiesArray.length)];
-                  if (rand[2] == false) {
-                    $('#story-preview').append(
-                      '<p>'+rand[0]+'</p><br><a href="/stories/'+rand[1]+'/sentences/new">Add a Sentence</a><br></br>'+
-                      '<a href="/stories/'+rand[1]+'">see contributors & more</a>');
-                  } else {
-                    $('#story-preview').append(
-                      '<p>'+rand[0]+'</p><br>'+
-                      '<p style="color: #EF9A9A">You were the most recent to contribute. You can add a new sentence after someone else has.</p><br>' +
-                      '<a href="/stories/'+rand[1]+'">see contributors & more</a>');
-                  }
-              })
-              </script>
-              <%end%> -->
+
+
+
+
             </div>
         <br>
             <button type="button" id="next-button">NEXT</button>

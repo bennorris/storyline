@@ -1,6 +1,6 @@
 $(document).on('click', '#next-button', function() {
     $('#story-preview').empty();
-    var storiesArray = <%=raw @stories_for_js%>
+    
     var rand = storiesArray[Math.floor(Math.random() * storiesArray.length)];
     if (rand[2] == false) {
       $('#story-preview').append(
