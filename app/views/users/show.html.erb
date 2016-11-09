@@ -1,5 +1,4 @@
-<link rel="stylesheet" href="../app/assets/stylesheets/application.css">
-
+<%= javascript_include_tag 'home_page' %>
 <div class="story-box">
 <h2>Start a new story.</h2>
 <br>
@@ -63,7 +62,7 @@
             <% end %>
             <%=link_to "see contributors & more", story_path(story)  %><br>
 
-        <%content_for :head do %>
+        <!-- <%content_for :head do %>
               <script type="text/javascript">
               $(document).on('click', '#next-button', function() {
                   $('#story-preview').empty();
@@ -81,7 +80,7 @@
                   }
               })
               </script>
-              <%end%>
+              <%end%> -->
             </div>
         <br>
             <button type="button" id="next-button">NEXT</button>
