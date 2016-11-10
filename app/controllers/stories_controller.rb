@@ -13,14 +13,6 @@ class StoriesController < ApplicationController
     end
   end
 
-  def edit
-    @story = Story.find_by_id(params[:id])
-  end
-
-  def update
-    add_to_story
-    redirect_to story_path(@story)
-  end
 
   def show
     @story = Story.find_by_id(params[:id])
@@ -39,18 +31,11 @@ class StoriesController < ApplicationController
   end
 
 
-
 private
 
   def story_params
     params.require(:story).permit(:beginning)
   end
 
-  def add_to_story
-    @story = Story.find_by_id(params[:id])
-    @story.full_story = @story.full_story + " " + story_params[:beginning]
-    @story.users << current_user
-    @story.save
-  end
 
 end

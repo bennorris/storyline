@@ -2,11 +2,9 @@ class SentencesController < ApplicationController
 
   def new
     @story = Story.find_by_id(params[:story_id])
-
     if @story.last_to_post?(current_user)
       redirect_to user_path(current_user)
     end
-
     @sentence = Sentence.new
   end
 
@@ -15,14 +13,13 @@ class SentencesController < ApplicationController
     if !story.last_to_post?(current_user)
       new_sentence = story.sentences.build(sentence_params)
       new_sentence.user = current_user
-
-      if new_sentence.save
-        story.full_story = story.full_story + " " + new_sentence.content
-        story.save
-        redirect_to story_path(story)
-      else
-        redirect_to new_story_sentence_path, :flash => { :error => "Sentence cannot be blank and must be under 100 characters." }
-      end
+        if new_sentence.save
+          story.full_story = story.full_story + " " + new_sentence.content
+          story.save
+          redirect_to story_path(story)
+        else
+          redirect_to new_story_sentence_path, :flash => { :error => "Sentence cannot be blank and must be under 100 characters." }
+        end
     else
       redirect_to user_path(current_user)
     end
