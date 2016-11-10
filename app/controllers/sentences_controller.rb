@@ -17,7 +17,7 @@ class SentencesController < ApplicationController
       new_sentence.user = current_user
 
       if new_sentence.save
-        story.sentences.size == 1 ? story.full_story = story.beginning + " " + new_sentence.content : story.full_story = story.full_story + " " + new_sentence.content
+        story.full_story = story.full_story + " " + new_sentence.content
         story.save
         redirect_to story_path(story)
       else
