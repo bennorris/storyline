@@ -1,5 +1,5 @@
 <div class="login-or-signup">
-
+<br>
 <h2>Log in</h2>
 <%if devise_error_messages!%>
   <div class="login-error">
@@ -14,10 +14,6 @@
   <% end %>
     </div>
   <%end%>
-
-
-
-
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
@@ -41,6 +37,6 @@
     <%= f.submit "Log in" %>
   </div>
 <% end %>
-
+<h3 class="make-account"><%=link_to "Don't have an account yet? Click here to create one.", new_registration_path(resource_name)%></h3>
 <%= render "devise/shared/links" %>
 </div>

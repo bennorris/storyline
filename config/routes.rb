@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks", :registrations => 'registrations' }
 
-  root 'users#welcome'
-  resources :users
+  root 'users#show'
+  resources :users , only: [:create, :new, :edit, :update, :destroy, :show]
   resources :stories do
     resources :upvotes, only: [:create]
     resources :sentences do

@@ -1,19 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
 
-  def welcome
-    if current_user
-      redirect_to user_path(current_user)
-    end
-  end
-
-  def index
-    @user = current_user
-  end
-
-  def create
-  end
-
   def show
     if current_user_page
       @user = current_user

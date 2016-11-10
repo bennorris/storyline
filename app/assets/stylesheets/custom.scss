@@ -521,7 +521,17 @@ div.login-error {
   color: red;
 }
 
-/* ////// MOBILE VERSION ///////// */
+h3.make-account a{
+  color: #BF360C;
+}
+
+h3.make-account a:hover {
+  color: #3b5998;
+}
+
+
+
+/* ////// MOBILE VERSION - COMING SOON ///////// */
 
 @media only screen and (max-device-width: 692px) {
 
