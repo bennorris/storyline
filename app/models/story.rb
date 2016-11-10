@@ -5,7 +5,6 @@ class Story < ApplicationRecord
   has_many :upvotes, :as => :upvotable
   has_many :users, through: :sentences, :foreign_key => "user_id"
 
-
   validates :beginning, presence: true
   validates :beginning, length: { maximum: 100 }
 
@@ -28,24 +27,15 @@ end
     users = []
     self.upvotes.each do |vote|
         user = User.find_by_id(vote.user_id)
-
-        if user && user.username
           users << user.username
-        elsif user && user.email
-          users << user.email
-        end
       end
 
     self.sentences.each do |sentence|
       sentence.upvotes.each do |vote|
         user = User.find_by_id(vote.user_id)
-        if user && user.username
           users << user.username
-        elsif user && user.email
-          users << user.email
         end
       end
-    end
     users
   end
 
