@@ -1,34 +1,13 @@
 <div class="story-so-far">
 
-<h1>The Story So Far:</h1>
-
-<%if @story.full_story.nil?%>
-  <h3><%=@story.beginning%></h3>
-<%else%>
+  <h1>The Story So Far:</h1>
   <h3><%=@story.full_story%></h3>
-<%end%>
+  <%= render 'new_sentence_form', sentence: @sentence %>
 
+  <h3>Contributors:</h3>
+    <%= render 'contributors', story: @story%>
 
-<%=form_for(@sentence, :url => story_sentences_path) do |f| %>
-  <%if flash[:error].present?%>
-    <%=f.text_field :content, :maxlength => 100, :value => nil, :placeholder => "#{flash[:error]}" %>
-  <%else%>
-    <%=f.text_field :content, :maxlength => 100, :value => nil%>
-    <% end %>
-<%=f.submit "Add Your Sentence" %>
-<% end %>
-
-  <h3>Contributors:  <br><br>
-
-  <%=@story.user.username%>: <%=@story.beginning %><br><br>
-
-  <%if @story.sentences.size > 0 %>
-    <%@story.sentences.each do |sentence| %>
-        <%=sentence.user.username %>: <%=sentence.content%><br><br>
-        <% end %>  </h3>
-    <% end %>
-    </h3>
-    <div class="back-button">
+  <div class="back-button">
       <p><%=link_to("Back", user_path(current_user))%></p>
-    </div>
+  </div>
 </div>

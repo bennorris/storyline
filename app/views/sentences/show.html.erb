@@ -1,24 +1,21 @@
 <div class="sentence-show-page">
 
-<div class="sentence-box">
-<p class="individual-sentence">THE SENTENCE:</p><p><%=@sentence.content%> </p>
-</div>
-<div class="sentence-box">
-<p class="individual-sentence">Written by:</p><p><%=@user.email %></p>
-</div>
-<div class="sentence-box">
-<p class="individual-sentence">Upvotes:</p><p><%=@sentence.upvotes.size%></p>
-</div>
-<div class="sentence-box">
-<p class="individual-sentence">Upvoted By:</p>
-<p><%if @upvotes.empty?%>None, yet.</p><%else%>
-<p><%=@upvotes.to_sentence%></p>
-<%end%>
-</div>
-<div class="sentence-box">
-<p class="individual-sentence">Created on:</p><p><%=@created%></p>
-</div>
+  <div class="sentence-box">
+    <p class="individual-sentence">THE SENTENCE:</p><p><%=@sentence.content%> </p>
+  </div>
+  <div class="sentence-box">
+    <p class="individual-sentence">Written by:</p><p><%=@user.email %></p>
+  </div>
+  <div class="sentence-box">
+    <p class="individual-sentence">Upvotes:</p><p><%=@sentence.upvotes.size%></p>
+  </div>
+  <div class="sentence-box">
+    <p class="individual-sentence">Upvoted By:</p><p><%= sentence_upvotes(@upvotes) %></p>
+  </div>
+  <div class="sentence-box">
+    <p class="individual-sentence">Created on:</p><p><%=style_created(@created)%></p>
+  </div>
 
-<p><%=link_to("Back", story_path(params[:story_id]))%></p>
+  <p><%=link_to("Back", story_path(params[:story_id]))%></p>
 
 </div>

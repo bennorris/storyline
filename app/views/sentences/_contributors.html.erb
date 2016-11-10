@@ -1,0 +1,7 @@
+<h3><%=story.user.username%>: <%=story.beginning %><br><br>
+
+<%if story.sentences.size > 0 %>
+  <%story.sentences.each do |s| %>
+      <%=s.user.username %>: <%=s.content%><br><br>
+      <% end %>  </h3>
+  <% end %>
