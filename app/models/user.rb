@@ -3,6 +3,8 @@ class User < ApplicationRecord
   has_many :sentences
   has_many :upvotes
 
+  validates :username, presence: true
+  validates :email, presence: true 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
 

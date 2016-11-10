@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'dotenv-rails'
 gem 'pry'
 gem 'devise'
 gem 'cancancan'
