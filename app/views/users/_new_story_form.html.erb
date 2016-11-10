@@ -1,0 +1,12 @@
+<%=form_for(@story) do |f|%>
+  <%if flash[:error].present?%>
+    <%=f.text_field :beginning, :maxlength => 100, :placeholder => "#{flash[:error]}" %>
+  <% else %>
+    <%=f.text_field :beginning, :maxlength => 100, :placeholder => "What's the best sentence you have?" %>
+  <% end %>
+  <br>
+    <%=fields_for :genre do |g|%>
+      <%=g.text_field :name, :placeholder => "Add a genre here."%>
+      <%end%>
+  <%=f.submit "Start Story" %>
+  <% end %> 

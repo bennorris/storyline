@@ -1,0 +1,18 @@
+<%if flash[:success]%><div class="flash-success"><p><%=flash[:success]%><br></p></div><%end%>
+<%if flash[:failure]%><div class="flash-success"><p><%=flash[:failure]%><br></p></div><%end%>
+<%=form_for(genre) do |f| %>
+  <%=fields_for :story do |g| %>
+  <%if flash[:error].present?%>
+    <%=g.text_field :beginning, :maxlength => 100, :placeholder => "#{flash[:error]}" %>
+  <% else %>
+    <%=g.text_field :beginning, :maxlength => 100, :placeholder => "What's the best sentence you have?" %>
+  <% end %>
+    <% end %>
+    <br>
+    <%if flash[:genre_error].present?%>
+      <%=f.text_field :name, :placeholder => "#{flash[:genre_error]}" %>
+    <%else%>
+      <%=f.text_field :name, :placeholder => "Add a genre here" %>
+    <% end %>
+  <%=f.submit "Start Story"%>
+  <% end %>
