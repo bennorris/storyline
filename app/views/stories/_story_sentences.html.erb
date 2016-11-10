@@ -1,0 +1,19 @@
+<%count = 1 %>
+  <%if count.odd?%>
+    <div class="contributor-1">
+  <%else%>
+    <div class="contributor-2">
+  <% end %>
+
+  <%if sentence.user %>
+  <p><%=link_to "#{sentence.user.username}", user_stats_path(sentence.user)%>:&nbsp;&nbsp;<%=link_to "#{sentence.content}", story_sentence_path(@story, sentence) %></p><br>
+      <% if sentence.already_voted? { current_user.id } %>
+        <p class="upvotes">you upvoted this!&nbsp;&nbsp;|&nbsp;&nbsp;
+      <% else %>
+        <p class="upvotes"><%=link_to "upvote", story_sentence_upvotes_path(@story, sentence), :method => :post %>&nbsp;&nbsp;|&nbsp;&nbsp;
+      <%end%>
+      total upvotes: <%=sentence.upvotes.size%></p><br>
+      <br>
+    <%count+=1%>
+  </div>
+<%end%>

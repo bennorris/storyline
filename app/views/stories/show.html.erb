@@ -1,83 +1,26 @@
 <div class="story-show-page">
 
+ <h1>The Story So Far:</h1>
+   <div class="the-story-in-show">
+     <%= render partial: 'current_stories', locals: {story: @story, sentence: @sentence}%>
+   </div>
 
-<h1>The Story So Far:</h1>
-<div class="the-story-in-show">
+ <h3>Contributors:</h3>
+  <p><%=any_flash_messages?%></p>
+   <div class="contributors-box">
+      <%=render 'first_sentence', story: @story %>
+      <%=render :collection => @story.sentences, :partial => "story_sentences", :as => :sentence %>
+   </div>
 
-  <%= render partial: 'current_stories', locals: {story: @story, sentence: @sentence}%>
-
-</div>
-
-  <br>
-    <div class="story-started-by">
-  <h3>Started by:</h3><br><p><%=@story.user.username%></p><br>
-  </div>
-
-  <h3>Contributors:</h3>
-  <%if flash[:success].present?%>
-    <p><%=flash[:success] %></p>
-  <%elsif flash[:error].present?%>
-    <p><%=flash[:error]%></p>
-    <% end %>
-
-  <div class="contributors-box">
-    <!--FIRST SENTENCE IS THE STORY BEGINNING -->
-    <div class="contributor-2">
-      <p><%=link_to "#{@story.user.username}", user_stats_path(@story.user)%>:&nbsp;&nbsp;<%=link_to "#{@story.beginning}", story_path(@story) %></p><br>
-
-    <% if @story.already_voted_story? { current_user.id } %>
-
-      <p class="upvotes">you upvoted this!&nbsp;&nbsp;|&nbsp;&nbsp;
-    <% else %>
-    <p class="upvotes"><%=link_to "upvote", story_upvotes_path(@story), :method => :post %>&nbsp;&nbsp;|&nbsp;&nbsp;
-  <%end%>
-    total upvotes: <%=@story.upvotes.size%></p><br>
-    </div>
+ <div class="story-started-by">
+   <h3>Upvoted by:</h3>
     <br>
-
-    <!--END STORY BEGINNING, MOVE TO STORY SENTENCES -->
-    <%count = 1 %>
-    <%@story.sentences.each do |sentence| %>
-      <%if count.odd?%>
-        <div class="contributor-1">
-      <%else%>
-        <div class="contributor-2">
-      <% end %>
-
-      <%if sentence.user %>
-      <p><%=link_to "#{sentence.user.username}", user_stats_path(sentence.user)%>:&nbsp;&nbsp;<%=link_to "#{sentence.content}", story_sentence_path(@story, sentence) %></p><br>
-
-          <% if sentence.already_voted? { current_user.id } %>
-
-            <p class="upvotes">you upvoted this!&nbsp;&nbsp;|&nbsp;&nbsp;
-          <% else %>
-          <p class="upvotes"><%=link_to "upvote", story_sentence_upvotes_path(@story, sentence), :method => :post %>&nbsp;&nbsp;|&nbsp;&nbsp;
-        <%end%>
-          total upvotes: <%=sentence.upvotes.size%></p><br>
-          <br>
-        <%count+=1%></div>
-        <%end%>
-        <%end%></p>
-      </div>
-    </div>
-    <!--END CONTRIBUTORS -->
-
-    <!--START UPVOTES USERS LIST -->
-
-  <div class="story-started-by">
-    <h3>Upvoted by:</h3>
+     <p><%=has_upvotes?(@story)%></p>
     <br>
-    <%if @story.unique_upvotes.empty?%><p>None, yet</p><%end%>
-    <p><%=@story.unique_upvotes.to_sentence %></p>
+    <br>
+ </div>
 
-        <br>
-        <br>
-  </div>
-
-
-<br>
-<br>
-<div class="back-to-profile">
-<%=link_to("Back to Your Profile", user_path(current_user)) %>
-</div>
+ <div class="back-to-profile">
+   <%=link_to("Back to Your Profile", user_path(current_user)) %>
+ </div>
 </div>
