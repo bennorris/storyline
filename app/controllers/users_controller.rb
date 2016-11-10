@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    if current_user.id.to_i == params[:id].to_i
+    if current_user_page
       @user = current_user
       @genre = Genre.new
       @story = Story.new
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    if current_user.id == params[:id].to_i
+    if current_user_page
       @user = current_user
     else
       redirect_to edit_user_path(current_user)
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if current_user.id.to_i == params[:id].to_i
+    if current_user_page
       @user = current_user
       @user.username = params[:user][:username]
         if @user.save
@@ -61,5 +61,12 @@ class UsersController < ApplicationController
     session.clear
     redirect_to root_path
   end
+
+private
+
+  def current_user_page
+    current_user.id.to_i == params[:id].to_i
+  end
+
 
 end
