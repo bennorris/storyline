@@ -18,7 +18,14 @@
     <%if flash[:genre_error].present?%>
       <%=f.text_field :name, :placeholder => "#{flash[:genre_error]}" %>
     <%else%>
-      <%=f.text_field :name, :placeholder => "Add a genre here" %>
+
+      <%= f.text_field :name, placeholder: "Add genre", list: "categories_autocomplete" %>
+        <datalist id="categories_autocomplete">
+          <% Genre.all.each do |genre| %>
+            <option value="<%= genre.name %>">
+          <% end %>
+        </datalist>
+
     <% end %>
   <%=f.submit "Start Story"%>
   <% end %>
