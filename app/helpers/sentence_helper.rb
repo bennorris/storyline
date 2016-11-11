@@ -1,6 +1,6 @@
 module SentenceHelper
 
-  def sentence_upvotes(upvotes)
+  def current_sentence_upvotes(upvotes)
     if upvotes.empty?
       return "None, yet."
     else

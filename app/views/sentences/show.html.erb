@@ -10,7 +10,7 @@
     <p class="individual-sentence">Upvotes:</p><p><%=@sentence.upvotes.size%></p>
   </div>
   <div class="sentence-box">
-    <p class="individual-sentence">Upvoted By:</p><p><%= sentence_upvotes(@upvotes) %></p>
+    <p class="individual-sentence">Upvoted By:</p><p><%= current_sentence_upvotes(@upvotes) %></p>
   </div>
   <div class="sentence-box">
     <p class="individual-sentence">Created on:</p><p><%=style_created(@created)%></p>
