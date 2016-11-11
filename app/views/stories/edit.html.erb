@@ -1,9 +1,0 @@
-<h1>The Story So Far:</h1>
-
-<h3><%=@story.full_story%></h3>
-
-
-<%=form_for(@story) do |f| %>
-<%=f.text_field :beginning, :maxlength => 100, :value => nil %>
-<%=f.submit %>
-<% end %>
