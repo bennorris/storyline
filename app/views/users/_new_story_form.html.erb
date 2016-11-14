@@ -1,3 +1,11 @@
+<div class="flash-success">
+<%if flash[:success]%>
+    <p><%=flash[:success]%><br></p>
+<%elsif flash[:failure]%>
+  <p><%=flash[:failure]%><br></p>
+<%end%>
+</div>
+
 <%=form_for(@story) do |f|%>
   <%if flash[:error].present?%>
     <%=f.text_field :beginning, :maxlength => 100, :placeholder => "#{flash[:error]}" %>
@@ -5,8 +13,5 @@
     <%=f.text_field :beginning, :maxlength => 100, :placeholder => "What's the best sentence you have?" %>
   <% end %>
   <br>
-    <%=fields_for :genre do |g|%>
-      <%=g.text_field :name, :placeholder => "Add a genre here."%>
-      <%end%>
   <%=f.submit "Start Story" %>
-  <% end %> 
+  <% end %>

@@ -6,15 +6,19 @@
 <div class="story-box">
  <h2>Start a new story.</h2>
  <br>
-  <%= render "new_genre_story_form", genre: @genre %>
-<!--going to replace the above after the assessment - just needed nested form -->
-  <!--<%= render 'new_story_form', story: @story %> -->
+ <!--genre form commented out below, if it's needed -->
+<!-- <%= render "new_genre_story_form", genre: @genre %> -->
+  <%= render 'new_story_form', story: @story %>
 </div>
 
 <div class="other-stories-box">
    <h2> Add to a different story. </h2>
     <%if !@all_stories.nil?%>
-      <%= render "all_stories", :story => @all_stories.sample %>
+      <%if !@all_stories.empty? %>
+        <%= render "all_stories", :story => @all_stories.sample %>
+      <%else%>
+        <h3>None, yet!</h3>
+        <% end %>
     <% end %>
 </div>
 
@@ -23,7 +27,7 @@
   <h2>Your Stories</h2>
   <div class="your-stories-content">
     <%if @user_stories.empty?%>
-      <h3>None yet!</h3>
+      <h3>None, yet!</h3>
     <% else %>
       <%=render :collection => @user_stories.reverse, :partial => "your_stories", :as => :story %>
     <% end %>

@@ -2,7 +2,9 @@ class StoriesController < ApplicationController
   before_action :authenticate_user!
 
   def create
+
     #save this - will use when nested form is removed from home page.
+    @story = Story.new(story_params)
     @story = current_user.stories.build(story_params)
     @story.full_story = @story.beginning
 

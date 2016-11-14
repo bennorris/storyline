@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :stories
   has_many :sentences
   has_many :upvotes
+  has_many :genres
 
   validates :username, presence: true
   validates :email, presence: true

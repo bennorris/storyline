@@ -7,12 +7,13 @@
 </div>
 
 <%=form_for(genre) do |f| %>
-  <%=fields_for :story do |g| %>
+  <%=f.fields_for :stories_attributes do |g| %>
     <%if flash[:error].present?%>
       <%=g.text_field :beginning, :maxlength => 100, :placeholder => "#{flash[:error]}" %>
     <% else %>
       <%=g.text_field :beginning, :maxlength => 100, :placeholder => "What's the best sentence you have?" %>
     <% end %>
+       
    <%end %>
   <br>
     <%if flash[:genre_error].present?%>
@@ -21,7 +22,7 @@
 
       <%= f.text_field :name, placeholder: "Add genre", list: "categories_autocomplete" %>
         <datalist id="categories_autocomplete">
-          <% Genre.all.each do |genre| %>
+          <% @all_genres.each do |genre| %>
             <option value="<%= genre.name %>">
           <% end %>
         </datalist>
