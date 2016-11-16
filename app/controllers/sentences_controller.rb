@@ -41,6 +41,14 @@ class SentencesController < ApplicationController
     redirect_to user_path(current_user), :flash => { :deleted => "Successfully deleted post."}
   end
 
+  def index
+    @sentences = Sentence.all.select { |s| s.user_id == current_user.id}
+    respond_to do |f|
+      f.html {render :index }
+      f.json {render json: @sentences}
+    end
+  end 
+
 
 
 private

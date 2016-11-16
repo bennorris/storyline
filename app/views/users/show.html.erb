@@ -29,7 +29,8 @@
     <%if @user_stories.empty?%>
       <h3>None, yet!</h3>
     <% else %>
-      <%=render :collection => @user_stories.reverse, :partial => "your_stories", :as => :story %>
+      <%=render 'your_stories', :story => @user_stories.sample %>
+      <!-- <%=render :collection => @user_stories.reverse, :partial => "your_stories", :as => :story %> -->
     <% end %>
   </div>
 </div>

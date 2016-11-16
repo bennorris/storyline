@@ -1,8 +1,7 @@
-<h3><%=story.full_story%></h3>
-<%=link_to("details", story_path(story)) %>&nbsp;&nbsp;|&nbsp;&nbsp;<%=link_to("delete", story_path(story), :method => :delete, data: {confirm: "Are you sure you want to delete this?"}) %>
-<br>
-  <%if !story.sentences.last.nil? %>
-      <%if story.sentences.last.user_id != current_user.id %>
-        <h3><%=link_to("Add a Sentence", new_story_sentence_path(story))%></h3>
-    <% end %>
-  <%end%>
+<%= javascript_include_tag 'your_stories' %>
+
+  <h3 id='user-story-full'><%=story.full_story%></h3>
+  <%=link_to("details", story_path(story)) %>&nbsp;&nbsp;|&nbsp;&nbsp;<%=link_to("delete", story_path(story), :method => :delete, data: {confirm: "Are you sure you want to delete this?"}) %>
+  <br>
+
+  <button type="button" id="your-stories-button">NEXT</button>

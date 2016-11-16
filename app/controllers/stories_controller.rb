@@ -32,6 +32,14 @@ class StoriesController < ApplicationController
     end
   end
 
+  def index
+      @stories = Story.all.select { |story| story.user_id == current_user.id}
+      respond_to do |f|
+        f.html {render :index}
+        f.json {render json: @stories}
+      end
+  end
+
 
 private
 
