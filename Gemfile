@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'active_model_serializers'
 gem 'dotenv-rails'
 gem 'pry'
 gem 'devise'
