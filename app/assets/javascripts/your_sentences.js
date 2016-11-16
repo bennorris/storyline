@@ -16,12 +16,11 @@ function nextSentence() {
   } else {
     count = 0;
   }
-  console.log(allSentences.length);
-  console.log(count);
 }
 
 function bind() {
-$(document).on('click', '#your-sentences-button', function() {
+$(document).on('click', '#your-sentences-button', function(e) {
+    e.stopImmediatePropagation();
     nextSentence();
     });
 }

@@ -5,5 +5,5 @@
   <%=link_to("full story", story_path(sentence.story)) %>&nbsp;&nbsp;|&nbsp;&nbsp;<%=link_to("delete", story_sentence_path(sentence.story, sentence), :method => :delete) %>
 <%else%>
   <p class="red" style="color: red">this story was deleted</p>
-<% end %>
+<% end %><br>
 <button type="button" id="your-sentences-button">NEXT</button>

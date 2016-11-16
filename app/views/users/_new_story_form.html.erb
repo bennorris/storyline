@@ -34,6 +34,7 @@
         $('#success').text("Success! You can find your story below, in the 'Your Stories' section.");
         $("form").trigger("reset");
         $('input').removeAttr('disabled');
+        getStories();
       });
     });
   });
