@@ -191,7 +191,7 @@ div.individual-story a {
 
 div.individual-story button {
   font-family: 'Didact Gothic', sans-serif;
-  font-size: 1.25em;
+  font-size: 20px;
   color: white;
   border: 4px solid #0D47A1;
   padding: 0.5%;
@@ -233,6 +233,22 @@ div.your-contributions-box p.red {
 
 div.your-contributions-box a {
   color: #FFD54F;
+}
+
+div.your-contributions-box button {
+  font-family: 'Didact Gothic', sans-serif;
+  font-size: 20px;
+  color: white;
+  border: 4px solid #0D47A1;
+  padding: 0.5%;
+  background-color: transparent;
+
+  margin-top: 2%;
+}
+
+div.your-contributions-box button:hover {
+  color: white;
+  background-color: #0D47A1;
 }
 
 div.flash-success {
