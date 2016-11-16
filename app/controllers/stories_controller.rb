@@ -5,11 +5,11 @@ class StoriesController < ApplicationController
 
     #save this - will use when nested form is removed from home page.
     @story = Story.new(story_params)
-    @story = current_user.stories.build(story_params)
+    @story.user_id = current_user.id
     @story.full_story = @story.beginning
 
     if @story.save
-      redirect_to user_path(current_user), :flash => { :success => "Success! You can find your story below, in the 'Your Stories' section." }
+      render json: @story, status: 201
     else
       redirect_to user_path(current_user), :flash => { :error => "Story cannot be blank and must be under 100 characters." }
     end

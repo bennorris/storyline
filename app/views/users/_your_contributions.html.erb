@@ -1,3 +1,5 @@
+<%= javascript_include_tag 'your_sentences' %>
+
 <p id="your-sentence-content"><%=sentence.content%></p>
 <%if sentence.story%>
   <%=link_to("full story", story_path(sentence.story)) %>&nbsp;&nbsp;|&nbsp;&nbsp;<%=link_to("delete", story_sentence_path(sentence.story, sentence), :method => :delete) %>
@@ -5,39 +7,3 @@
   <p class="red" style="color: red">this story was deleted</p>
 <% end %>
 <button type="button" id="your-sentences-button">NEXT</button>
-
-
-<script type="text/javascript">
-var allSentences = [];
-var count = 0;
-
-function getSentences() {
-  $.get("/sentences.json", function(data) {
-    for (var i=0; i<data.length; i++) {
-      allSentences.push([data[i].content]);
-      }
-    })
-  }
-
-function nextSentence() {
-  $('#your-sentence-content').text(allSentences[count]);
-  if (count < (allSentences.length - 1) ){
-    count += 1;
-  } else {
-    count = 0;
-  }
-  console.log(allSentences.length);
-  console.log(count);
-}
-
-function bind() {
-$(document).on('click', '#your-sentences-button', function() {
-    nextSentence();
-    });
-}
-
-
-getSentences();
-bind();
-
-</script>

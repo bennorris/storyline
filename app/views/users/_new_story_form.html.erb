@@ -1,6 +1,8 @@
 <div class="flash-success">
+  <p id="success"></p>
 <%if flash[:success]%>
     <p><%=flash[:success]%><br></p>
+
 <%elsif flash[:failure]%>
   <p><%=flash[:failure]%><br></p>
 <%end%>
@@ -15,3 +17,24 @@
   <br>
   <%=f.submit "Start Story" %>
   <% end %>
+
+  <div id="postResult">
+  <p id="storyTitle"></h2>
+</div>
+
+
+  <script type="text/javascript" charset="utf-8">
+  $(function () {
+    $('form').submit(function(event) {
+      event.preventDefault();
+      var values = $(this).serialize();
+      var posting = $.post('/stories', values);
+      posting.done(function(data) {
+        $("#user-story-full").text(data["full_story"]);
+        $('#success').text("Success! You can find your story below, in the 'Your Stories' section.");
+        $("form").trigger("reset");
+        $('input').removeAttr('disabled');
+      });
+    });
+  });
+</script>
