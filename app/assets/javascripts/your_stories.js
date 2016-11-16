@@ -11,7 +11,7 @@ function getStories() {
 
 function nextStory() {
   $('#user-story-full').text(allStories[count]);
-  if (count < allStories.length ){
+  if (count < (allStories.length - 1) ){
     count += 1;
   } else {
     count = 0;

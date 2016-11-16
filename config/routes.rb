@@ -13,5 +13,5 @@ Rails.application.routes.draw do
   resources :genres, only: [:new, :create]
   get '/user/:id/stats', to: 'users#stats', as: "user_stats"
   post '/users', to: 'users#create'
-
+  get '/sentences', to: 'sentences#index'
 end

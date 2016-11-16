@@ -29,6 +29,7 @@
     <%if @user_stories.empty?%>
       <h3>None, yet!</h3>
     <% else %>
+
       <%=render 'your_stories', :story => @user_stories.sample %>
       <!-- <%=render :collection => @user_stories.reverse, :partial => "your_stories", :as => :story %> -->
     <% end %>
@@ -41,6 +42,6 @@
   <% if @user_contributions.size < 1 %>
       <p> None, yet! </p>
  <% else %>
-   <%= render :collection => @user_contributions.reverse, :partial => "your_contributions", :as => :sentence %>
+    <%= render 'your_contributions', :sentence => @user_contributions.sample %>
  <% end %>
 </div>
