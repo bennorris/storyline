@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root 'users#show'
   resources :users , only: [:create, :new, :edit, :update, :destroy, :show]
-  resources :stories, only: [:create, :new, :show, :destroy] do
+  resources :stories, only: [:create, :new, :show, :destroy, :index] do
     resources :upvotes, only: [:create]
     resources :sentences do
       resources :upvotes, only: [:create]
