@@ -2,7 +2,7 @@
   <div id="story-preview">
     <p><%=story.full_story%></p>
     <% if story.sentences.last.nil? && story.user_id != current_user.id %>
-      <%=link_to("Add a Sentence", new_story_sentence_path(story.id)) %><br><br>
+      <p><%=link_to("Add a Sentence", new_story_sentence_path(story.id)) %></p><br><br>
     <%elsif story.sentences.last.nil? && story.user_id == current_user.id %>
         <p style="color: #EF9A9A">You were the most recent to contribute. You can add a new sentence after someone else has.</p>
     <%elsif story.sentences.last.user == current_user %>
