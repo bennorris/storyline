@@ -22,6 +22,7 @@ function updateCount() {
 function nextStory() {
   $('#user-story-full').text(allStories[storyCount]);
   $('#next-user-story').attr('href', '/stories/' + storyIds[storyCount]);
+  $('#delete-your-story').attr('href', '/stories/' + storyIds[storyCount]);
   updateCount();
 } //reset storyCount to 0 once it hits the length of the array
 
