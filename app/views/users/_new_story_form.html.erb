@@ -32,6 +32,7 @@
       posting.done(function(data) {
         $("#user-story-full").text(data["full_story"]);
         $('#success').text("Success! You can find your story below, in the 'Your Stories' section.");
+        $('a#next-user-story').attr('href', '/stories/' + data['id']);
         $("form").trigger("reset");
         $('input').removeAttr('disabled');
         getStories();
