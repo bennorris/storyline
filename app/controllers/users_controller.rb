@@ -16,6 +16,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def all_stories
+    @user = current_user
+    @stories = @user.stories
+  end
+
   def stats
     @user = User.find_by_id(params[:id])
     @stories = @user.stories.size
@@ -49,6 +54,7 @@ class UsersController < ApplicationController
     session.clear
     redirect_to root_path
   end
+
 
 private
 

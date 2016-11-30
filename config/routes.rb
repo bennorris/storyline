@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root 'users#show'
   resources :users , only: [:create, :new, :edit, :update, :destroy, :show]
+  get '/users/:id/stories', to: 'users#all_stories', as: "all_user_stories"
   resources :stories, only: [:create, :new, :show, :destroy, :index] do
     resources :upvotes, only: [:create]
     resources :sentences do
