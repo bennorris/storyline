@@ -61,10 +61,8 @@ $(function() {
     if (open == false) {
     $.get('/users/' + user + '/stories.json', function(data) {
       for (var i=0;i<data.length;i++) {
-      $('#zzz').append(data[i].full_story + '<br>' + "<a href='/stories/" + data[i].id + "'>details</a>" + "&nbsp;&nbsp;|&nbsp;&nbsp<a href='/stories/" + data[i].id + "' data-method='delete' data-confirm='Are you sure you want to delete this?'>delete</a> " + '<br><br>');
-
-
-
+      console.log(data[i].upvotes.length);
+      $('#zzz').append(data[i].full_story + '<br>' + "<a href='/stories/" + data[i].id + "'>details</a>" + "&nbsp;&nbsp;|&nbsp;&nbsp<a href='/stories/" + data[i].id + "' data-method='delete' data-confirm='Are you sure you want to delete this?'>delete</a>&nbsp&nbsp|&nbsp&nbsp <a href='#'>upvotes: " + data[i].upvotes.length + '</a><br><br>');
     };
   });
     open = true;

@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   resources :users , only: [:create, :new, :edit, :update, :destroy, :show]
   get '/users/:id/stories', to: 'users#index', as: "all_user_stories"
   resources :stories, only: [:create, :new, :show, :destroy, :index] do
-    resources :upvotes, only: [:create]
+    resources :upvotes, only: [:create, :show]
     resources :sentences do
-      resources :upvotes, only: [:create]
+      resources :upvotes, only: [:create, :show]
     end
   end
 

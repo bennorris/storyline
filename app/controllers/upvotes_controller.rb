@@ -6,11 +6,21 @@ class UpvotesController < ApplicationController
 
     if params[:story_id] && !params[:sentence_id]
       user_upvote(params[:story_id], "Story")
-    elsif params[:story_id] && params[:sentence_id] 
+    elsif params[:story_id] && params[:sentence_id]
       user_upvote(params[:sentence_id], "Sentence")
     end
 
   end
+
+  def show
+  @upvote = Upvote.find(params[:id])
+    respond_to do |f|
+      f.html { render :show }
+      f.json { render json: @upvote }
+    end
+
+  end
+
 
 private
 
