@@ -6,7 +6,7 @@
    </div>
 
  <h3>Contributors:</h3>
-  <p><%=any_flash_messages?%></p>
+  <p id="upvote-flash"><%=any_flash_messages?%></p>
    <div class="contributors-box">
       <%=render 'first_sentence', story: @story %>
       <%=render :collection => @story.sentences, :partial => "story_sentences", :as => :sentence %>

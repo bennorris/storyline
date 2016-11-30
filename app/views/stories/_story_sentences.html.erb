@@ -10,40 +10,10 @@
       <% if sentence.already_voted? { current_user.id } %>
         <p class="upvotes">you upvoted this!&nbsp;&nbsp;|&nbsp;&nbsp;
       <% else %>
-        <p class="upvotes"><%=link_to "upvote", story_sentence_upvotes_path(@story, sentence), :id => 'upvote-link', :method => :post %>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <p class="upvotes"><%=link_to "upvote", story_sentence_upvotes_path(@story, sentence), :id => 'sentence-upvote-link', :method => :post %>&nbsp;&nbsp;|&nbsp;&nbsp;
       <%end%>
       total upvotes: <%=sentence.upvotes.size%></p><br>
       <br>
     <%count+=1%>
   </div>
 <%end%>
-
-<button type="button" id="test-sentence-id" name="button">sentence id test</button>
-<%= javascript_tag do %>
-  var sentenceId = <%= sentence.id.to_json%>
-  var userId = <%= sentence.user.id %>
-  var storyId = <%= sentence.story.id %>
-  <% end %>
-
-<!--EDIT BELOW FOR UPVOTE SERIALIZER -->
-
-<script type="text/javascript" charset="utf-8">
-$(function () {
-  $('#test-sentence-id').on('click', function(event) {
-    event.preventDefault();
-    var values = { user_id: userId, upvotable_id:  sentenceId, upvotable_type: 'Sentence'};
-    var posting = $.post('/stories/' + storyId + '/sentences/' + sentenceId + '/upvotes', values);
-  });
-});
-
-
-    // var values = $(this).serialize();
-    // var posting = $.post('/upvotes', values);
-    // posting.done(function(data) {
-    //   $('#success').text("Success! You can find your story below, in the 'Your Stories' section.");
-    //   $("form").trigger("reset");
-    //   $('input').removeAttr('disabled');
-    // });
-  //});
-// });
-</script>

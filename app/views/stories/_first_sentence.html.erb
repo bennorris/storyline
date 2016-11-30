@@ -5,26 +5,8 @@
 
   <p class="upvotes">you upvoted this!&nbsp;&nbsp;|&nbsp;&nbsp;
 <% else %>
-<p class="upvotes"><%=link_to "upvote", story_upvotes_path(@story), :method => :post, :id => "upvote-link" %>&nbsp;&nbsp;|&nbsp;&nbsp;
+<p class="upvotes"><%=link_to "upvote", story_upvotes_path(@story), :method => :post, :id => "story-upvote-link" %>&nbsp;&nbsp;|&nbsp;&nbsp;
 <%end%>
 total upvotes: <%=@story.upvotes.size%></p><br>
-<button id="test-button" type="button" name="button">TEST</button>
 </div>
 <br>
-
-
-<%= javascript_tag do %>
-  var storyId = <%= story.id.to_json%>
-  var userId = <%= story.user.id.to_json %>
-  <% end %>
-
-<script type="text/javascript" charset="utf-8">
-$(function () {
-  $('#test-button').on('click', function(event) {
-    event.preventDefault();
-    var values = { user_id: userId, upvotable_id: storyId, upvotable_type: 'Story'};
-    var posting = $.post('/stories/' + storyId '/upvotes'); 
-  });
-});
-
-</script>
