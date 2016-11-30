@@ -31,7 +31,9 @@
     <% else %>
       <%=render 'your_stories', :story => @user_stories.sample %>
       <br><button type="button" id="view-all-button">View All Stories</button>
-
+      <div class="dese-stories">
+        <h3 id='zzz'></h3>
+      </div>
       <!-- <%=render :collection => @user_stories.reverse, :partial => "your_stories", :as => :story %> -->
     <% end %>
   </div>
@@ -46,7 +48,7 @@
  <% end %>
 </div>
 
-<!-- JS FOR APPENDING ALL STORIES --> 
+<!-- JS FOR APPENDING ALL STORIES -->
 
 <%=javascript_tag do %>
   var user = <%= @user.id %>
@@ -54,11 +56,21 @@
 
 <script type="text/javascript">
 $(function() {
-    $('#view-all-button').on('click', function() {
-      var data = $.get('/users/' + user + '/stories.json');
+  var open = false;
+  $('#view-all-button').on('click', function() {
+    if (open == false) {
+    $.get('/users/' + user + '/stories.json', function(data) {
       console.log(data);
-    })
+      for (var i=0;i<data.length;i++) {
+      $('#zzz').append(data[i].full_story + '<br>' + "<a href='/stories/" + data[i].id + "'>details</a>" + '<br><br>');
 
-
-  })
+    };
+  });
+    open = true;
+  } else if (open == true) {
+      $('#zzz').html('');
+      open = false;
+    }
+  });
+});
 </script>
