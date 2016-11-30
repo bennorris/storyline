@@ -29,13 +29,13 @@
     <%if @user_stories.empty?%>
       <h3>None, yet!</h3>
     <% else %>
-
       <%=render 'your_stories', :story => @user_stories.sample %>
+      <br><button type="button" id="view-all-button">View All Stories</button>
+
       <!-- <%=render :collection => @user_stories.reverse, :partial => "your_stories", :as => :story %> -->
     <% end %>
   </div>
 </div>
-
 
 <div class="your-contributions-box">
 <h2>Your Contributions</h2>
@@ -45,3 +45,20 @@
     <%= render 'your_contributions', :sentence => @user_contributions.sample %>
  <% end %>
 </div>
+
+<!-- JS FOR APPENDING ALL STORIES --> 
+
+<%=javascript_tag do %>
+  var user = <%= @user.id %>
+  <% end %>
+
+<script type="text/javascript">
+$(function() {
+    $('#view-all-button').on('click', function() {
+      var data = $.get('/users/' + user + '/stories.json');
+      console.log(data);
+    })
+
+
+  })
+</script>

@@ -16,9 +16,13 @@ class UsersController < ApplicationController
     end
   end
 
-  def all_stories
+  def index
     @user = current_user
     @stories = @user.stories
+    respond_to do |f|
+      f.html {render :index}
+      f.json {render json: @stories}
+    end
   end
 
   def stats
