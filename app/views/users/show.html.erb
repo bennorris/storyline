@@ -1,6 +1,7 @@
 <%= javascript_include_tag 'home_page' %>
 <script type="text/javascript" charset="utf-8">
   var storiesArray = <%=raw @stories_for_js%>
+  var user = <%= @user.id %>
 </script>
 
 <div class="story-box">
@@ -47,41 +48,3 @@
     <%= render 'your_contributions', :sentence => @user_contributions.sample %>
  <% end %>
 </div>
-
-<!-- JS FOR APPENDING ALL STORIES -->
-
-<%=javascript_tag do %>
-  var user = <%= @user.id %>
-  <% end %>
-
-<script type="text/javascript">
-
-var FullStory = function(story, id, upvoteSize) {
-  this.story = story;
-  this.id = id;
-  this.upvoteSize = upvoteSize;
-}
-
-function formatter(arg) {
-  return arg.story + '<br>' + "<a href='/stories/" + arg.id + "'>details</a>" + "&nbsp;&nbsp;|&nbsp;&nbsp<a href='/stories/" + arg.id + "' data-method='delete' data-confirm='Are you sure you want to delete this?'>delete</a>&nbsp&nbsp<p style='font-size:20px;color:#0D47A1'>upvotes: " + arg.upvoteSize + '</p><br><br>'
-}
-
-$(function() {
-  var open = false;
-  $('#view-all-button').on('click', function() {
-    if (open == false) {
-    $.get('/users/' + user + '/stories.json', function(data) {
-      for (var i=0;i<data.length;i++) {
-        var story = new FullStory(data[i].full_story, data[i].id, data[i].upvotes.length)
-        $('#story-list').append(formatter(story));
-
-    };
-  });
-    open = true;
-  } else if (open == true) {
-      $('#story-list').html('');
-      open = false;
-    }
-  });
-});
-</script>
