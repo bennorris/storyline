@@ -18,8 +18,8 @@ class UpvotesController < ApplicationController
       f.html { render :show }
       f.json { render json: @upvote }
     end
-
   end
+
 
 
 private
