@@ -31,8 +31,8 @@
     <% else %>
       <%=render 'your_stories', :story => @user_stories.sample %>
       <br><button type="button" id="view-all-button">View All Stories</button>
-      <div class="dese-stories">
-        <h3 id='zzz'></h3>
+      <div>
+        <h3 id='story-list'></h3>
       </div>
       <!-- <%=render :collection => @user_stories.reverse, :partial => "your_stories", :as => :story %> -->
     <% end %>
@@ -73,13 +73,13 @@ $(function() {
     $.get('/users/' + user + '/stories.json', function(data) {
       for (var i=0;i<data.length;i++) {
         var story = new FullStory(data[i].full_story, data[i].id, data[i].upvotes.length)
-        $('#zzz').append(formatter(story));
+        $('#story-list').append(formatter(story));
 
     };
   });
     open = true;
   } else if (open == true) {
-      $('#zzz').html('');
+      $('#story-list').html('');
       open = false;
     }
   });
