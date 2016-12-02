@@ -31,7 +31,7 @@
       <%@none = "None, yet" %>
       <%=render 'your_stories', :story => @none %>
    <% else %>
-      <%=render 'your_stories', :story => @user_stories.sample %>
+      <%=render 'your_stories', :story => @user_stories.first %>
       <br><button type="button" id="view-all-button">View All Stories</button>
       <div>
         <h3 id='story-list'></h3>
