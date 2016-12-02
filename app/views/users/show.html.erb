@@ -28,8 +28,9 @@
   <h2>Your Stories</h2>
   <div class="your-stories-content">
     <%if @user_stories.empty?%>
-      <h3>None, yet!</h3>
-    <% else %>
+      <%@none = "None, yet" %>
+      <%=render 'your_stories', :story => @none %>
+   <% else %>
       <%=render 'your_stories', :story => @user_stories.sample %>
       <br><button type="button" id="view-all-button">View All Stories</button>
       <div>

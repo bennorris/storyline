@@ -6,7 +6,7 @@
   <% end %>
 
   <%if sentence.user %>
-  <p><%=link_to "#{sentence.user.username}", user_stats_path(sentence.user)%>:&nbsp;&nbsp;<%=link_to "#{sentence.content}", story_sentence_path(@story, sentence) %></p><br>
+  <p><%=link_to "#{sentence.user.username}", user_stats_path(sentence.user)%>:&nbsp;&nbsp;<%=link_to "#{sentence.content}", story_sentence_path(@story, sentence), :id => 'each-sentence' %></p><br>
       <% if sentence.already_voted? { current_user.id } %>
         <p class="upvotes">you upvoted this!&nbsp;&nbsp;|&nbsp;&nbsp;
       <% else %>
