@@ -8,11 +8,11 @@ $('#next-button').unbind('click').on('click', function() {
 
     $('#story-preview').empty();
     var figure = Math.floor(Math.random() * deStories.length)
-    
+
    var rand = deStories[figure];
     if (rand[2] == false) {
       $('#story-preview').append(
-        '<p>'+rand[0]+'</p><a href="/stories/'+rand[1]+'/sentences/new">Add a Sentence</a><br>'+
+        '<p>'+rand[0]+'</p><a href="/stories/'+rand[1]+'">Add a Sentence</a><br>'+
         '<a href="/stories/'+rand[1]+'">see contributors & more</a><br><br>');
         deStories.splice(figure,1);
 
