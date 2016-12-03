@@ -2,21 +2,33 @@ $(function() {
 
 // SCROLLING THROUGH ALL STORIES
 
-$('#next-button').on('click', function() {
-//$(document).on('click', '#next-button', function() {
-    $('#story-preview').empty();
+$('#next-button').unbind('click').on('click', function() {
 
-    var rand = storiesArray[Math.floor(Math.random() * storiesArray.length)];
+    var deStories = storiesArray.slice(0);
+
+    $('#story-preview').empty();
+    var figure = Math.floor(Math.random() * deStories.length)
+    
+   var rand = deStories[figure];
     if (rand[2] == false) {
       $('#story-preview').append(
-        '<p>'+rand[0]+'</p><a href="/stories/'+rand[1]+'/sentences/new">Add a Sentence</a>'+
+        '<p>'+rand[0]+'</p><a href="/stories/'+rand[1]+'/sentences/new">Add a Sentence</a><br>'+
         '<a href="/stories/'+rand[1]+'">see contributors & more</a><br><br>');
+        deStories.splice(figure,1);
+
     } else {
       $('#story-preview').append(
         '<p>'+rand[0]+'</p>'+
         '<p style="color: #EF9A9A">You were the most recent to contribute. You can add a new sentence after someone else has.</p>' +
         '<a href="/stories/'+rand[1]+'">see contributors & more</a><br><br>');
+        deStories.splice(figure,1);
     }
+
+    if (deStories.length < 1) {
+      deStories = storiesArray;
+    }
+
+
 });
 
 // DROP DOWN LIST OF ALL USER STORIES ON CLICK
