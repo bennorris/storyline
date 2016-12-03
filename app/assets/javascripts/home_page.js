@@ -12,7 +12,7 @@ $('#next-button').unbind('click').on('click', function() {
    var rand = deStories[figure];
     if (rand[2] == false) {
       $('#story-preview').append(
-        '<p>'+rand[0]+'</p><a href="/stories/'+rand[1]+'">Add a Sentence</a><br>'+
+        '<p>'+rand[0]+'</p><p><a href="/stories/'+rand[1]+'">Add a Sentence</a></p>'+
         '<a href="/stories/'+rand[1]+'">see contributors & more</a><br><br>');
         deStories.splice(figure,1);
 
