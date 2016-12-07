@@ -8,6 +8,7 @@ class UsersController < ApplicationController
       @story = Story.new
       @all_stories = Story.all
       @user_stories = Story.all.select {|s| s.user == @user}
+      @user_ids = @user_stories.map do |story| story.id end
       @all_genres = Genre.all
       @user_contributions = @user.sentences
       @stories_for_js = Story.all_content(@user).to_json

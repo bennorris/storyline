@@ -1,4 +1,7 @@
 <%= javascript_include_tag 'your_stories' %>
+<script type="text/javascript" charset="utf-8">
+  var userIds = <%=@user_ids%>
+</script>
 
 <% if story == "None, yet"%>
 <h3 id='user-story-full'>None, yet</h3>
