@@ -34,7 +34,7 @@ class SentencesController < ApplicationController
 
   def destroy
     sentence = Sentence.find_by_id(params[:id])
-    story = Story.find_by(params[:story_id])
+    story = Story.find_by_id(params[:story_id])
     story.full_story = story.full_story.gsub("#{sentence.content}", "")
     story.save
     sentence.destroy
@@ -47,7 +47,7 @@ class SentencesController < ApplicationController
       f.html {render :index }
       f.json {render json: @sentences}
     end
-  end 
+  end
 
 
 
