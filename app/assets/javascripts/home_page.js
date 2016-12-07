@@ -1,64 +1,89 @@
-$(function() {
+var getUserId = function() {
+  $.get('/get_id.json', function(res) {
+     return res;
+  })
+}
 
-// SCROLLING THROUGH ALL STORIES
+var addStory = function() {
+  $.get('/stories.json', function(data) {
+    var currentUser = getUserId();
+    var stories = Object.keys(data)
+    var selected = data[stories[stories.length * Math.random() << 0]];
+    $('#story-beginning').html(selected.beginning);
+    $('#contributors-and-more').attr('href', `/stories/${selected.id}`);
+    $('#full-story-button').attr('val', selected.id);
+    var recentSentence = selected.sentences[selected.sentences.length-1]
+     if (recentSentence && recentSentence.user_id == currentUser ) {
+       $('#sentence-adder').html('<p style="color: #EF9A9A">You were the most recent to contribute. You can add a new sentence after someone else has.</p>')
+     } else {
+       $('#sentence-adder').html("<a href='/stories/"+ selected.id + "'>Add a sentence</a>");
+     }
+   })
 
-$('#next-button').unbind('click').on('click', function() {
+   clicked = false;
+   $('#full-story-button').text('see full story');
+}
 
-    var deStories = storiesArray.slice(0);
+var clicked = false;
 
-    $('#story-preview').empty();
-    var figure = Math.floor(Math.random() * deStories.length)
+var displayFullStory = function() {
+  var id = $('#full-story-button').attr('val');
+  $.get(`/stories/${id}.json`, function(data) {
+    if (clicked === false ) {
+    $('#story-beginning').html(data.full_story);
+    $('#full-story-button').text('back to beginning');
+    return clicked = !clicked;
+  }
+    $('#story-beginning').html(data.beginning);
+    $('#full-story-button').text('see full story');
+    clicked = !clicked;
+ })
+}
 
-   var rand = deStories[figure];
-    if (rand[2] == false) {
-      $('#story-preview').append(
-        '<p>'+rand[0]+'</p><p><a href="/stories/'+rand[1]+'">Add a Sentence</a></p>'+
-        '<a href="/stories/'+rand[1]+'">see contributors & more</a><br><br>');
-        deStories.splice(figure,1);
-
-    } else {
-      $('#story-preview').append(
-        '<p>'+rand[0]+'</p>'+
-        '<p style="color: #EF9A9A">You were the most recent to contribute. You can add a new sentence after someone else has.</p>' +
-        '<a href="/stories/'+rand[1]+'">see contributors & more</a><br><br>');
-        deStories.splice(figure,1);
-    }
-
-    if (deStories.length < 1) {
-      deStories = storiesArray;
-    }
-
-
-});
-
-// DROP DOWN LIST OF ALL USER STORIES ON CLICK
 var open = false;
 
-var FullStory = function(story, id, upvoteSize) {
-  this.story = story;
-  this.id = id;
-  this.upvoteSize = upvoteSize;
+var displayAllStories = function() {
+  if (open === false) {
+    return $.get('/users/' + user + '/stories.json', function(data) {
+              for (var i = 0; i < data.length; i++) {
+                var story = new Story(data[i]);
+                story.appendToDom();
+              };
+              return open = !open;
+            });
+  }
+  $('#story-list').html('');
+  open = !open;
+
+  }
+
+var Story = function(story) {
+  this.full_story = story.full_story;
+  this.id = story.id;
+  this.upvotes = story.upvotes.length;
 }
 
-function formatter(arg) {
-  return arg.story + '<br>' + "<a href='/stories/" + arg.id + "'>details</a>" + "&nbsp;&nbsp;|&nbsp;&nbsp<a href='/stories/" + arg.id + "' data-method='delete' data-confirm='Are you sure you want to delete this?'>delete</a>&nbsp&nbsp<p style='font-size:20px;color:#0D47A1'>upvotes: " + arg.upvoteSize + '</p><br><br>'
+Story.prototype.appendToDom = function() {
+  $('#story-list').append(
+    this.full_story + '<br>' + "<a href='/stories/" + this.id + "'>details</a>" + "&nbsp;&nbsp;|&nbsp;&nbsp<a href='/stories/" + this.id + "' data-method='delete' data-confirm='Are you sure you want to delete this?'>delete</a>&nbsp&nbsp<p style='font-size:20px;color:#0D47A1'>upvotes: " + this.upvotes + '</p><br><br>'
+  );
 }
 
-//$(document).on('click', '#view-all-button', function() {
-$('#view-all-button').unbind('click').on('click', function() {
-  if (open == false) {
-    $.get('/users/' + user + '/stories.json', function(data) {
 
-      for (var i=0;i<data.length;i++) {
-        var story = new FullStory(data[i].full_story, data[i].id, data[i].upvotes.length);
-        $('#story-list').append(formatter(story));
-    };
-    open = true;
+
+$(function() {
+  addStory();
+
+  $('#next-button').unbind('click').on('click', function() {
+    addStory();
   });
 
-  } else if (open == true) {
-      $('#story-list').html('');
-      open = false;
-    }
+  $('#view-all-button').unbind('click').on('click', function() {
+    displayAllStories();
   });
-});
+
+  $('#full-story-button').unbind('click').on('click', function() {
+    displayFullStory();
+  });
+
+})
