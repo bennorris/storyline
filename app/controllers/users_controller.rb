@@ -3,18 +3,15 @@ class UsersController < ApplicationController
 
   def show
     if current_user_page
-      @user = current_user
-      @genre = Genre.new
       @story = Story.new
-      @all_stories = Story.all
-      @user_stories = Story.all.select {|s| s.user == @user}
-      @user_ids = @user_stories.map do |story| story.id end
-      @all_genres = Genre.all
-      @user_contributions = @user.sentences
-      @stories_for_js = Story.all_content(@user).to_json
+      respond_to do |f|
+        f.json {render json: current_user.stories}
+        f.html {render :show}
+      end
     else
       redirect_to user_path(current_user)
     end
+
   end
 
   def index
@@ -60,6 +57,11 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def get_id
+    respond_to do |f|
+      f.json {render json: current_user.id}
+    end
+  end
 
 private
 
