@@ -108,6 +108,8 @@ var displayContribution = function() {
 var addUpvote = function(btn) {
     var storyId = $(btn).attr('class');
     var values = {user_id: currentUser};
+    $(`button#thumbs.${storyId}`).prop('disabled', true);
+    $(`button#thumbs.${storyId}`).addClass('thumb-clicked');
     var posting = $.post(`/stories/${storyId}/upvotes`, values);
     posting.done(function(data) {
       $.get(`/stories/${storyId}.json`, function(res) {
@@ -116,6 +118,7 @@ var addUpvote = function(btn) {
       })
     })
   }
+
 
 
 /////// RUN !! //////
