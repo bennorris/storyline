@@ -15,6 +15,7 @@ var addStory = function() {
     var stories = Object.keys(data)
     var selected = data[stories[stories.length * Math.random() << 0]];
     $('#story-beginning').html(selected.beginning);
+    $('#scroll-upvote').attr('class', selected.id);
     $('#contributors-and-more').attr('href', `/stories/${selected.id}`);
     $('#full-story-button').attr('val', selected.id);
     var recentSentence = selected.sentences[selected.sentences.length-1]
@@ -23,9 +24,27 @@ var addStory = function() {
      } else {
        $('#sentence-adder').html("<a href='/stories/"+ selected.id + "'>Add a sentence</a>");
      }
+
+     for (var i = 0; i < selected.upvotes.length; i++) {
+       if (selected.upvotes[i].user_id == currentUser)
+        $('#scroll-upvote').addClass('just-clicked');
+        $('#scroll-upvote').attr('disabled', true);
+     }
+
+     if (selected.sentences.length < 2) {
+       $('#full-story-button').addClass('only-one');
+       $('#full-story-button').attr('disabled', true);
+       $('#full-story-button').text('one sentence so far');
+     }
+     else {
+       $('#full-story-button').text('see full story');
+       $('#full-story-button').attr('disabled', false);
+       $('#full-story-button').removeClass('only-one');
+     }
    })
+
    clicked = false;
-   $('#full-story-button').text('see full story');
+   $('#upvote-success').text('');
 }
 
 var displayFullStory = function() {
@@ -119,7 +138,18 @@ var displayContribution = function() {
   })
 }
 
+
 /////////  UPVOTES /////////
+
+var addScrollUpvote = function(btn) {
+    var storyId = $(btn).attr('class');
+    var values = {user_id: currentUser};
+    var posting = $.post(`/stories/${storyId}/upvotes`, values);
+    posting.done(function(data) {
+      $('#upvote-success').text("Thanks for your upvote!");
+      $('#scroll-upvote').addClass('just-clicked');
+    })
+  }
 
 var addUpvote = function(btn) {
     var storyId = $(btn).attr('class');
@@ -171,6 +201,12 @@ $(function() {
       e.stopImmediatePropagation();
       e.preventDefault();
       addUpvote($(this));
-    })
+    });
+
+    $(document).on('click', '#scroll-upvote', function(e)  {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        addScrollUpvote($(this));
+      })
 
 })
