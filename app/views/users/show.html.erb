@@ -14,6 +14,7 @@
        <p id="sentence-adder"></p>
        <p><a href="" id="contributors-and-more">see contributors & more</a></p><br>
        <button type="button" id="full-story-button" val="">see full story</button>
+       <button type="button" id="scroll-upvote">upvote</button><p id="upvote-success"></p>
      </div>
        <br>
        <button type="button" id="next-button">NEXT</button>
@@ -35,13 +36,10 @@
 </div>
 
 <div class="your-contributions-box">
-<h2>Your Contributions</h2>
-<% if flash[:deleted]%>
-      <p style="color:red"><%=flash[:deleted] %></p>
-  <% end %>
-  <% if @user_contributions.size < 1 %>
-      <p> None, yet! </p>
- <% else %>
-    <%= render 'your_contributions', :sentence => @user_contributions.sample %>
- <% end %>
+ <h2>Your Contributions</h2>
+<!--Add none yet here if there are no contributions and check flash message for deleted -->
+  <p id="your-sentence-content"></p>
+  <p><a id="full-story-link" href="">full story</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a id="delete-sentence" href="" data-method="delete" data-confirm="Are you sure you want to delete this?">delete</a></p>
+  <button type="button" id="your-sentences-button">NEXT</button>
+
 </div>
