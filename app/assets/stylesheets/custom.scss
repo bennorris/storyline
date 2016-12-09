@@ -290,6 +290,14 @@ span.social-button a:hover {
   color: #FF8A80;
 }
 
+#full-story-button {
+  border-color: darkred;
+}
+
+#full-story-button:hover {
+  background-color: darkred;
+}
+
 /* NEW SENTENCE TO EXISTING STORY - SENTENCE/NEW */
 
 
@@ -572,6 +580,33 @@ div#error_explanation h2{
   font-size: 1.5em;
 }
 
+/*/////// Upvotes */
+
+#thumbs {
+  padding: 5px;
+  font-size: 1em;
+}
+#thumbs:hover {
+  color: orangered;
+}
+
+#thumbs.thumb-clicked {
+  color: gainsboro;
+  background-color: dimgray;
+  border: none;
+}
+
+button#full-story-button.only-one {
+  color: gray;
+  background: black;
+  border: 1px solid gray;
+}
+
+button#scroll-upvote.just-clicked {
+  color: gray;
+  background: black;
+  border: 1px solid gray;
+}
 
 /* ////// MOBILE VERSION - COMING SOON ///////// */
 
