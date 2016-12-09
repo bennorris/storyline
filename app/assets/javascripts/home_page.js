@@ -78,14 +78,30 @@ var displayFullStory = function() {
  var Story = function(story) {
    this.full_story = story.full_story;
    this.id = story.id;
-   this.upvotes = story.upvotes.length;
+   this.upvotesTotal = story.upvotes.length;
+   this.userVotes = story.upvotes;
  }
 
  Story.prototype.appendToDom = function() {
-   $('#story-list').append(
-     this.full_story + '<br>' + "<a href='/stories/" + this.id + "'>details</a>" + "&nbsp;&nbsp;|&nbsp;&nbsp<a href='/stories/" + this.id + "' data-method='delete' data-confirm='Are you sure you want to delete this?'>delete</a>&nbsp&nbsp<p style='font-size:20px;color:#0D47A1'><button id='thumbs' class='" + this.id + "'><i class='fa fa-thumbs-up' aria-hidden='true'></i></button>&nbsp;&nbsp|&nbsp;&nbsp;upvotes: <span class='" + this.id + "'>" + this.upvotes + '</span></p><br><br>'
-   );
- }
+   var showThumb = true;
+
+   for (var i = 0; i < this.userVotes.length; i++) {
+     if (this.userVotes[i].user_id.to_i == currentUser.to_i) {
+         showThumb = false;
+     }
+   }
+
+   if (showThumb == false) {
+      $('#story-list').append(
+        this.full_story + '<br>' + "<a href='/stories/" + this.id + "'>details</a>" + "&nbsp;&nbsp;|&nbsp;&nbsp<a href='/stories/" + this.id + "' data-method='delete' data-confirm='Are you sure you want to delete this?'>delete</a>&nbsp&nbsp<p style='font-size:20px;color:#0D47A1'><button id='thumbs' class='thumb-clicked " + this.id + "'><i class='fa fa-thumbs-up' aria-hidden='true'></i></button>&nbsp;&nbsp|&nbsp;&nbsp;upvotes: <span class='" + this.id + "'>" + this.upvotesTotal + '</span></p><br><br>'
+      );
+    }
+    else {
+    $('#story-list').append(
+      this.full_story + '<br>' + "<a href='/stories/" + this.id + "'>details</a>" + "&nbsp;&nbsp;|&nbsp;&nbsp<a href='/stories/" + this.id + "' data-method='delete' data-confirm='Are you sure you want to delete this?'>delete</a>&nbsp&nbsp<p style='font-size:20px;color:#0D47A1'><button id='thumbs' class='" + this.id + "'><i class='fa fa-thumbs-up' aria-hidden='true'></i></button>&nbsp;&nbsp|&nbsp;&nbsp;upvotes: <span class='" + this.id + "'>" + this.upvotesTotal + '</span></p><br><br>');
+    }
+}
+
 
 ///// Your Contributions Section //////
 
@@ -151,7 +167,7 @@ $(function() {
     displayContribution();
     });
 
-    $(document).on('click', '#thumbs', function(e)  {
+  $(document).on('click', '#thumbs', function(e)  {
       e.stopImmediatePropagation();
       e.preventDefault();
       addUpvote($(this));
