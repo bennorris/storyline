@@ -43,17 +43,6 @@ var displayFullStory = function() {
 }
 
 ////// Your Stories Section   ///////
- //
- // var allUserIds = function() {
- //   var userIds = [];
- //   $.get(`/users/${currentUser}.json`, function(res) {
- //     for (var i = 0; i < res.length; i++ ) {
- //       userIds.push(res[i].id);
- //     }
- //   })
- //   console.log(userIds);
- //   return userIds;
- // }
 
  var idCount = 0;
 
@@ -94,11 +83,39 @@ var displayFullStory = function() {
 
  Story.prototype.appendToDom = function() {
    $('#story-list').append(
-     this.full_story + '<br>' + "<a href='/stories/" + this.id + "'>details</a>" + "&nbsp;&nbsp;|&nbsp;&nbsp<a href='/stories/" + this.id + "' data-method='delete' data-confirm='Are you sure you want to delete this?'>delete</a>&nbsp&nbsp<p style='font-size:20px;color:#0D47A1'>upvotes: " + this.upvotes + '</p><br><br>'
+     this.full_story + '<br>' + "<a href='/stories/" + this.id + "'>details</a>" + "&nbsp;&nbsp;|&nbsp;&nbsp<a href='/stories/" + this.id + "' data-method='delete' data-confirm='Are you sure you want to delete this?'>delete</a>&nbsp&nbsp<p style='font-size:20px;color:#0D47A1'><button id='thumbs' class='" + this.id + "'><i class='fa fa-thumbs-up' aria-hidden='true'></i></button>&nbsp;&nbsp|&nbsp;&nbsp;upvotes: <span class='" + this.id + "'>" + this.upvotes + '</span></p><br><br>'
    );
  }
 
+///// Your Contributions Section //////
 
+var sentenceCount = 0;
+
+var displayContribution = function() {
+  $.get('/users/' + currentUser + '/sentences.json', function(res) {
+    $('#your-sentence-content').text(res[sentenceCount].content);
+    $('#full-story-link').attr('href', `/stories/${res[sentenceCount].story_id}`);
+    $('#delete-sentence').attr('href', `/stories/${res[sentenceCount].story_id}/sentences/${res[sentenceCount].id}`)
+    if (sentenceCount < res.length - 1 ) {
+      return sentenceCount += 1
+    }
+    sentenceCount = 0;
+  })
+}
+
+/////////  UPVOTES /////////
+
+var addUpvote = function(btn) {
+    var storyId = $(btn).attr('class');
+    var values = {user_id: currentUser};
+    var posting = $.post(`/stories/${storyId}/upvotes`, values);
+    posting.done(function(data) {
+      $.get(`/stories/${storyId}.json`, function(res) {
+          var upvoteCount = res.upvotes.length;
+          $(`span.${storyId}`).text(upvoteCount);
+      })
+    })
+  }
 
 
 /////// RUN !! //////
@@ -106,6 +123,7 @@ $(function() {
   getUserId();
   addStory();
   getUserStory();
+  displayContribution();
 
 
   $('#next-button').unbind('click').on('click', function() {
@@ -124,4 +142,16 @@ $(function() {
       e.stopImmediatePropagation();
       getUserStory();
     });
-  })
+
+  $('#your-sentences-button').unbind('click').on('click', function(e) {
+    e.stopImmediatePropagation();
+    displayContribution();
+    });
+
+    $(document).on('click', '#thumbs', function(e)  {
+      e.stopImmediatePropagation();
+      e.preventDefault();
+      addUpvote($(this));
+    })
+
+})
