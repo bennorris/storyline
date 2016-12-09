@@ -16,13 +16,18 @@ var addStory = function() {
     var selected = data[stories[stories.length * Math.random() << 0]];
     $('#story-beginning').html(selected.beginning);
     $('#scroll-upvote').attr('class', selected.id);
+    $('#scroll-upvote').attr('disabled', false);
     $('#contributors-and-more').attr('href', `/stories/${selected.id}`);
     $('#full-story-button').attr('val', selected.id);
     var recentSentence = selected.sentences[selected.sentences.length-1]
      if (recentSentence && recentSentence.user_id == currentUser ) {
-       $('#sentence-adder').html('<p style="color: #EF9A9A">You were the most recent to contribute. You can add a new sentence after someone else has.</p>')
-     } else {
-       $('#sentence-adder').html("<a href='/stories/"+ selected.id + "'>Add a sentence</a>");
+        $('#sentence-adder').html('<p style="color: #EF9A9A">You were the most recent to contribute. You can add a new sentence after someone else has.</p>');
+     }
+      else if (selected.sentences.length < 1 && selected.user_id == currentUser) {
+        $('#sentence-adder').html('<p style="color: #EF9A9A">You were the most recent to contribute. You can add a new sentence after someone else has.</p>');
+     }
+      else {
+        $('#sentence-adder').html("<a href='/stories/"+ selected.id + "'>Add a sentence</a>");
      }
 
      for (var i = 0; i < selected.upvotes.length; i++) {
@@ -148,6 +153,7 @@ var addScrollUpvote = function(btn) {
     posting.done(function(data) {
       $('#upvote-success').text("Thanks for your upvote!");
       $('#scroll-upvote').addClass('just-clicked');
+      $('#scroll-upvote').attr('disabled', true);
     })
   }
 
