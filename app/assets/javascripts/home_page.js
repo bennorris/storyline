@@ -19,6 +19,7 @@ var addStory = function() {
     $('#scroll-upvote').attr('disabled', false);
     $('#contributors-and-more').attr('href', `/stories/${selected.id}`);
     $('#full-story-button').attr('val', selected.id);
+    $('#full-story-button').attr('disabled', false);
     var recentSentence = selected.sentences[selected.sentences.length-1]
      if (recentSentence && recentSentence.user_id == currentUser ) {
         $('#sentence-adder').html('<p style="color: #EF9A9A">You were the most recent to contribute. You can add a new sentence after someone else has.</p>');
@@ -36,7 +37,7 @@ var addStory = function() {
         $('#scroll-upvote').attr('disabled', true);
      }
 
-     if (selected.sentences.length < 2) {
+     if (selected.sentences.length < 1) {
        $('#full-story-button').addClass('only-one');
        $('#full-story-button').attr('disabled', true);
        $('#full-story-button').text('one sentence so far');
@@ -170,7 +171,6 @@ var addUpvote = function(btn) {
       })
     })
   }
-
 
 
 /////// RUN !! //////
