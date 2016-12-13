@@ -1,6 +1,7 @@
 $(function () {
-  $('form').submit(function(event) {
+  $('form#new_story').submit(function(event) {
     event.preventDefault();
+    event.stopImmediatePropagation();
     var values = $(this).serialize();
     var posting = $.post('/stories', values);
     posting.done(function(data) {
@@ -9,12 +10,13 @@ $(function () {
       $('a#next-user-story').text('details');
       $('a#delete-your-story').attr('href', '/stories/' + data['id']);
       $('a#delete-your-story').text('delete');
-      $("form").trigger("reset");
-      $('input').removeAttr('disabled');
+      $('input#story_beginning').trigger("reset");
+      $('input#story_beginning').val('');
+      $('form#new_story').removeAttr('disabled');
       if (data['full_story']) {
         $('#success').text("Success! You can find your story below, in the 'Your Stories' section.");
       }
-      getStories();
+
     });
   });
 });
