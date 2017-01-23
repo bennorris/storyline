@@ -10,6 +10,8 @@ class UpvotesController < ApplicationController
       user_upvote(params[:sentence_id], "Sentence")
     end
 
+    render json: { upvotes: @story.upvotes }
+
   end
 
   def show

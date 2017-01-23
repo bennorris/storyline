@@ -11,12 +11,12 @@ var getUserId = function() {
 var clicked = false;
 
 var addStory = function() {
-  $.get('/stories.json', function(data) {
+  $.get('/all_stories.json', function(data) {
     var stories = Object.keys(data)
     var selected = data[stories[stories.length * Math.random() << 0]];
     $('#story-beginning').html(selected.beginning);
     $('#scroll-upvote').attr('class', selected.id);
-    $('#scroll-upvote').attr('disabled', false);
+    $('#scroll-upvote').prop('disabled', false);
     $('#contributors-and-more').attr('href', `/stories/${selected.id}`);
     $('#full-story-button').attr('val', selected.id);
     $('#full-story-button').attr('disabled', false);
@@ -125,6 +125,7 @@ var displayFullStory = function() {
     $('#story-list').append(
       this.full_story + '<br>' + "<a href='/stories/" + this.id + "'>details</a>" + "&nbsp;&nbsp;|&nbsp;&nbsp<a href='/stories/" + this.id + "' data-method='delete' data-confirm='Are you sure you want to delete this?'>delete</a>&nbsp&nbsp<p style='font-size:20px;color:#0D47A1'><button id='thumbs' class='" + this.id + "'><i class='fa fa-thumbs-up' aria-hidden='true'></i></button>&nbsp;&nbsp|&nbsp;&nbsp;upvotes: <span class='" + this.id + "'>" + this.upvotesTotal + '</span></p><br><br>');
     }
+    showThumb = true;
 }
 
 
@@ -149,28 +150,45 @@ var displayContribution = function() {
 
 var addScrollUpvote = function(btn) {
     var storyId = $(btn).attr('class');
-    var values = {user_id: currentUser};
-    var posting = $.post(`/stories/${storyId}/upvotes`, values);
-    posting.done(function(data) {
-      $('#upvote-success').text("Thanks for your upvote!");
-      $('#scroll-upvote').addClass('just-clicked');
-      $('#scroll-upvote').attr('disabled', true);
-    })
+    var upvote = new Upvote(storyId);
+    upvote.addToScrollUpvote();
+
   }
 
 var addUpvote = function(btn) {
-    var storyId = $(btn).attr('class');
-    var values = {user_id: currentUser};
+  var storyId = $(btn).attr('class');
+  var upvote = new Upvote(storyId);
+  upvote.addToListUpvote();
+  }
+
+  var Upvote = function(story) {
+    this.user_id = currentUser;
+    this.upvotable_id = story
+  }
+
+  Upvote.prototype.addToScrollUpvote = function() {
+    var val = {user_id: this.user_id, upvotable_id: this.upvotable_id};
+    $.post(`/stories/${this.upvotable_id}/upvotes`, val)
+       .done(function() {
+          $('#upvote-success').text("Thanks for your upvote!");
+          $('#scroll-upvote').addClass('just-clicked');
+          $('#scroll-upvote').attr('disabled', true);
+      })
+      .fail(function(error) {
+        console.log(error);
+      });
+  }
+
+  Upvote.prototype.addToListUpvote = function() {
+    var storyId = this.upvotable_id
     $(`button#thumbs.${storyId}`).prop('disabled', true);
     $(`button#thumbs.${storyId}`).addClass('thumb-clicked');
-    var posting = $.post(`/stories/${storyId}/upvotes`, values);
-    posting.done(function(data) {
-      $.get(`/stories/${storyId}.json`, function(res) {
-          var upvoteCount = res.upvotes.length;
-          $(`span.${storyId}`).text(upvoteCount);
+    var val = {user_id: this.user_id, upvotable_id: this.upvotable_id};
+    $.post(`/stories/${storyId}/upvotes`, val)
+      .done(function(data) {
+        $(`span.${storyId}`).text(data.upvotes.length);
       })
-    })
-  }
+}
 
 
 /////// RUN !! //////

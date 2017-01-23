@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   post '/users', to: 'users#create'
   get '/sentences', to: 'sentences#index'
   get '/get_id', to: 'users#get_id'
+  get '/all_stories', to: 'stories#all_stories'
 end

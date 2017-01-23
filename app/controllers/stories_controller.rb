@@ -2,8 +2,6 @@ class StoriesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-
-    #save this - will use when nested form is removed from home page.
     @story = Story.new(story_params)
     @story.user_id = current_user.id
     @story.full_story = @story.beginning
@@ -19,6 +17,10 @@ class StoriesController < ApplicationController
   def show
     @story = Story.find_by_id(params[:id])
     @sentence = Sentence.new
+    respond_to do |f|
+      f.html {render :show}
+      f.json {render json: @story}
+    end
   end
 
   def destroy
@@ -33,11 +35,18 @@ class StoriesController < ApplicationController
   end
 
   def index
-      @stories = Story.all.select { |story| story.user_id == current_user.id}
+      @stories = current_user.stories
       respond_to do |f|
         f.html {render :index}
         f.json {render json: @stories}
       end
+  end
+
+  def all_stories
+    @stories = Story.all
+    respond_to do |f|
+      f.json {render json: @stories}
+    end
   end
 
 
